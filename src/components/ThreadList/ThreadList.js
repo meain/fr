@@ -31,12 +31,27 @@ class ThreadList extends Component {
     })
   }
 
+  handleLike(ev, key){
+    if (this.props.user){
+      let threadLikeRef = firebase.database().ref('threads/' + key + '/likes/' + this.props.user.uid)
+      threadLikeRef.once('value', snap => {
+        let sval = snap.val()
+        let statusVal = true
+        if (sval != null)
+          statusVal = !sval
+        snap.ref.set(statusVal)
+        let userLikeRef = firebase.database().ref('users/' + this.props.user.uid + '/likes/' + key)
+        userLikeRef.set(statusVal)
+      })
+    }
+  }
+
   render(){
     return (
       <div className="threads">
         { this.state.threads.map( thread => {
           return (
-            <Thread key={thread.id} data={thread.data}/>
+            <Thread key={thread.id} data={thread.data} handleLike={(e) => this.handleLike(e, thread.id)}/>
           )
         })
         }

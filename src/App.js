@@ -5,6 +5,7 @@ import firebase from './firebase.js';
 
 import User from './components/User/User'
 import ThreadList from './components/ThreadList/ThreadList'
+import Editor from './components/Editor/Editor'
 
 class App extends Component {
 
@@ -18,6 +19,7 @@ class App extends Component {
 
     this.handleAuth = this.handleAuth.bind(this)
     this.addThread = this.addThread.bind(this)
+
   }
 
   handleAuth(user){
@@ -26,13 +28,12 @@ class App extends Component {
     this.setState(curState)
   }
 
-  addThread(){
-    console.log('this.state.user: ', this.state.user);
+  addThread(data){
     if (this.state.user) {
-      const content =
+      const thread =
         {
-          title: "Smooth :/",
-          content: "Wooo, chill there kid",
+          title: data.title,
+          content: data.content,
           createdAt: Date.now(),
           posts: [],  // Sub posts, we will most probably have only one ( jsut in case )
           likes: [],  // Will contain user uids
@@ -44,9 +45,15 @@ class App extends Component {
             displayImage: this.state.user.photoURL
           }
         }
-      firebase.database().ref('threads').push(content);
+      let key = firebase.database().ref('threads').push(thread).key;
+      console.log('key: ', key);
+
+      // Add theard data to user
+      firebase.database().ref('users/' + this.state.user.uid + '/threads/' + key).set(true)
     }
   }
+
+
 
 
   render() {
@@ -57,11 +64,12 @@ class App extends Component {
 
         <br/>
 
-        <ThreadList />
+        <Editor onSubmit={this.addThread}  />
 
         <br/>
+        <ThreadList user={this.state.user} />
 
-      <button onClick={this.addThread}> Add </button>
+
     </div>
     );
   }
