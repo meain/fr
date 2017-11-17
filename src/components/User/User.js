@@ -32,15 +32,17 @@ class User extends Component {
     userRef.once('value', snap => {
       console.log('snap.val(): ', snap.val());
       const d = snap.val()
-      // firebase does not create space for empty values
-      if (d.threads)
-        userInfo.threads = d.threads
-      if (d.likes)
-        userInfo.likes = d.likes
-      if (d.posts)
-        userInfo.posts = d.posts
-      if (d.registeredAt)
-        userInfo.registeredAt = d.registeredAt
+      if (d != null) {
+        // firebase does not create space for empty values
+        if (d.threads)
+          userInfo.threads = d.threads
+        if (d.likes)
+          userInfo.likes = d.likes
+        if (d.posts)
+          userInfo.posts = d.posts
+        if (d.registeredAt)
+          userInfo.registeredAt = d.registeredAt
+      }
       firebase.database().ref('users/' + user.uid).set({ ...userInfo });
     })
   }
@@ -82,7 +84,8 @@ class User extends Component {
       <div className="User">
         {this.state.user ?
           <div>
-            <p>{ this.state.user.displayName }</p>
+          <img className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+            <p className="User-name">{ this.state.user.displayName }</p>
             <button onClick={this.logout}>Log Out</button>
           </div>
         :

@@ -1,7 +1,7 @@
-.User{
-    border: 1px solid firebrick;
+.Thread{
+  border: 1px solid green;
 }
-.User-image{
+.Thread-user-image{
     width: 50px;
     height: auto;
     border-radius: 50px;

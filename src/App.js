@@ -4,6 +4,7 @@ import './App.css';
 import firebase from './firebase.js';
 
 import User from './components/User/User'
+import ThreadList from './components/ThreadList/ThreadList'
 
 class App extends Component {
 
@@ -32,34 +33,19 @@ class App extends Component {
         {
           title: "Smooth :/",
           content: "Wooo, chill there kid",
-          ceatedAt: Date.now(),
-          posts: [],
+          createdAt: Date.now(),
+          posts: [],  // Sub posts, we will most probably have only one ( jsut in case )
+          likes: [],  // Will contain user uids
+          stars:[],  // bookmark question ( implement later )
           user: {
             uid: this.state.user.uid,
-            displyName: this.state.user.displayName,
+            displayName: this.state.user.displayName,
             email: this.state.user.email,
             displayImage: this.state.user.photoURL
           }
         }
       firebase.database().ref('threads').push(content);
     }
-  }
-
-  jsonToList(data){
-    let list = []
-    for( var i in data ){
-      list.push({ "id": i, "data": data[i]})
-    }
-    return list
-  }
-
-  componentDidMount(){
-    let threadsRef = firebase.database().ref('threads')
-    threadsRef.on('value', snapshot => {
-      let curState = this.state
-      curState.threads = this.jsonToList(snapshot.val())
-      this.setState(curState)
-    })
   }
 
 
@@ -69,14 +55,11 @@ class App extends Component {
       <div>
         <User handle={this.handleAuth} />
 
-        <div className="threads">
-          { this.state.threads.map( thread => {
-            return (
-              <p key={thread.id}>{ thread.data.title }</p>
-            )
-          })
-          }
-      </div>
+        <br/>
+
+        <ThreadList />
+
+        <br/>
 
       <button onClick={this.addThread}> Add </button>
     </div>
