@@ -32,6 +32,7 @@ class ThreadList extends Component {
   }
 
   handleLike(ev, key){
+    ev.stopPropagation();
     if (this.props.user){
       let threadLikeRef = firebase.database().ref('threads/' + key + '/likes/' + this.props.user.uid)
       threadLikeRef.once('value', snap => {
