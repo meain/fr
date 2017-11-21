@@ -9,7 +9,6 @@ class Thread extends Component {
   }
 
   numOfLikes(){
-    console.log('this.props.data: ', this.props.data);
     if ( this.props.data.likes !== undefined ){
       let likes = 0
       for (let i in this.props.data.likes) {
@@ -26,7 +25,7 @@ class Thread extends Component {
 
   render(){
     return (
-      <div className="Thread">
+      <div className="Thread" onClick={this.props.handleClick}>
         <img className="Thread-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
         <p>{this.props.data.user.displayName}</p>
         <p>{ this.getDate(this.props.data.createdAt) }</p>

@@ -46,12 +46,23 @@ class ThreadList extends Component {
     }
   }
 
+  handleClick(ev, key){
+    console.log('Clicked on thread ', key);
+    console.log('this.props.history: ', this.props.history);
+    this.props.history.push('/thread/' + key)
+  }
+
   render(){
     return (
       <div className="threads">
         { this.state.threads.map( thread => {
           return (
-            <Thread key={thread.id} data={thread.data} handleLike={(e) => this.handleLike(e, thread.id)}/>
+            <Thread
+            key={thread.id}
+            data={thread.data}
+            handleLike={(e) => this.handleLike(e, thread.id)}
+            handleClick={(e) => this.handleClick(e, thread.id)}
+            />
           )
         })
         }
