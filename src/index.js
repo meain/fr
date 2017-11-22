@@ -4,5 +4,23 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import firebase from './firebase'
+import { Provider } from 'react-redux'
+
+import store from './redux.js'
+// console.log('store.getState(): ', store.getState());
+
+let threadsRef = firebase.database().ref('threads')
+threadsRef.on('value', snapshot => {
+      store.dispatch({
+	    type: "FIREBASE_THREAD_CHANGE",
+	    payload: snapshot.val(),
+      })
+})
+
+ReactDOM.render(
+      <Provider store={store}>
+	    <App />
+      </Provider>,
+      document.getElementById('root'));
 registerServiceWorker();

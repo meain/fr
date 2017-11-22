@@ -1,33 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './ThreadList.css';
 
 import firebase from '../../firebase.js';
+
+import { updateThreads, userChanged } from '../../reducers.js'
 
 import Thread from '../Thread/Thread'
 
 class ThreadList extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      threads: [],
-    }
-  }
-
-  jsonToList(data){
-    let list = []
-    for( var i in data ){
-      list.push({ "id": i, "data": data[i]})
-    }
-    return list
-  }
 
   componentDidMount(){
     let threadsRef = firebase.database().ref('threads')
     threadsRef.on('value', snapshot => {
-      let curState = this.state
-      curState.threads = this.jsonToList(snapshot.val())
-      this.setState(curState)
+      this.props.threadsChanged(snapshot.val())
     })
   }
 
@@ -48,15 +35,13 @@ class ThreadList extends Component {
   }
 
   handleClick(ev, key){
-    console.log('Clicked on thread ', key);
-    console.log('this.props.history: ', this.props.history);
     this.props.history.push('/thread/' + key)
   }
 
   render(){
     return (
       <div className="threads">
-        { this.state.threads.map( thread => {
+        { this.props.threads.map( thread => {
           return (
             <Thread
             key={thread.id}
@@ -73,4 +58,23 @@ class ThreadList extends Component {
 
 }
 
-export default ThreadList
+// export default ThreadList
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    threads: state.threads,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    threadsChanged: threads => {
+      dispatch(updateThreads(threads))
+    },
+    userChanged: user => {
+      dispatch(userChanged(user))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThreadList)
