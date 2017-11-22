@@ -1,5 +1,6 @@
 .Thread{
-  border: 1px solid green;
+  /* border: 1px solid green; */
+  margin-top: 5px;
 }
 .Thread-user-image{
     width: 50px;

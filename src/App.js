@@ -4,6 +4,9 @@ import './App.css';
 
 import firebase from './firebase.js';
 
+import 'antd/dist/antd.css';
+import { BackTop } from 'antd'
+
 import User from './components/User/User';
 import ThreadList from './components/ThreadList/ThreadList';
 import Editor from './components/Editor/Editor';
@@ -57,7 +60,8 @@ class App extends Component {
 	render() {
 		return (
         <Router>
-          <div>
+          <div class="App">
+        <BackTop/>
             <h1><Link to="/">Kerala AI</Link></h1>
             <User handle={this.handleAuth} />
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Thread.css';
 
+import { Card } from 'antd';
+
 class Thread extends Component {
 
   getDate(timestamp){
@@ -26,12 +28,15 @@ class Thread extends Component {
   render(){
     return (
       <div className="Thread" onClick={this.props.handleClick}>
+{/* <Card style={{ width: 300 }}> */}
+  <Card>
         <img className="Thread-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
         <p>{this.props.data.user.displayName}</p>
         <p>{ this.getDate(this.props.data.createdAt) }</p>
         <button onClick={this.props.handleLike}> Likes: { this.numOfLikes() }</button>
         <p>{ this.props.data.title }</p>
         <p>{ this.props.data.content } </p>
+      </Card>
       </div>
       )
   }
