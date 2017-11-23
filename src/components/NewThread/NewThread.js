@@ -44,7 +44,8 @@ class NewThead extends Component{
     return(
       <div className="NewThread">
         <h1>New Question</h1>
-        <Editor onSubmit={this.addThread} />
+        <br/>
+        <Editor hasHeading={true} onSubmit={this.addThread} />
       </div>
     )
   }

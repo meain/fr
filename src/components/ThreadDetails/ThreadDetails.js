@@ -78,11 +78,15 @@ class ThreadDetails extends Component {
           user={this.props.user}
           postKey={this.state.key}
           data={this.props.thread}
+          hasHeading={true}
           handleClick={(e) => {}}
         />
         <br/>
         <br/>
-      {this.props.user && this.state.posts.length===0 && <Editor onSubmit={this.addPost}/>}
+        {this.props.user && this.state.posts.length===0 &&
+          <Editor
+          title="Add answer"
+          onSubmit={this.addPost}/>}
       { this.state.posts.map( (post, i) => {
         return (
           <Post key={i} data={post} />

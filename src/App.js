@@ -9,6 +9,8 @@ import firebase from './firebase.js'
 import 'antd/dist/antd.css';
 import { BackTop } from 'antd'
 
+import 'react-simplemde-editor/dist/simplemde.min.css'
+
 import User from './components/User/User';
 import Editor from './components/Editor/Editor'
 import ThreadList from './components/ThreadList/ThreadList';
