@@ -17,6 +17,7 @@ threadsRef.on('value', snapshot => {
 	    payload: snapshot.val(),
       })
 })
+// let postsRef = firebase.database().ref('posts')
 
 ReactDOM.render(
       <Provider store={store}>

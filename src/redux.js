@@ -35,6 +35,8 @@ export const reducer = (state = initialState, action) => {
 			threads: jsonToList(action.payload)
 		  }
 		  break
+	    default:
+		  state = { ...state }
       }
       return state
 }

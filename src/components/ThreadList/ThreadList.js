@@ -7,9 +7,15 @@ import firebase from '../../firebase.js';
 import { updateThreads, userChanged } from '../../reducers.js'
 
 import Thread from '../Thread/Thread'
+import Editor from '../Editor/Editor';
 
 class ThreadList extends Component {
 
+  constructor(props){
+    super(props)
+
+    this.addThread = this.addThread.bind(this);
+  }
 
   componentDidMount(){
     let threadsRef = firebase.database().ref('threads')
@@ -34,6 +40,30 @@ class ThreadList extends Component {
     }
   }
 
+  addThread(data) {
+    if (this.props.user) {
+      const thread =
+        {
+          title: data.title,
+          content: data.content,
+          createdAt: Date.now(),
+          posts: [],  // Sub posts, we will most probably have only one ( jsut in case )
+          likes: [],  // Will contain user uids
+          stars: [],  // Bookmark question ( implement later )
+          user: {
+            uid: this.props.user.uid,
+            displayName: this.props.user.displayName,
+            email: this.props.user.email,
+            displayImage: this.props.user.photoURL
+          }
+        };
+      const key = firebase.database().ref('threads').push(thread).key;
+      console.log('key: ', key);
+      // Add theard data to user
+      firebase.database().ref('users/' + this.props.user.uid + '/threads/' + key).set(true);
+    }
+  }
+
   handleClick(ev, key){
     this.props.history.push('/thread/' + key)
   }
@@ -41,6 +71,7 @@ class ThreadList extends Component {
   render(){
     return (
       <div className="threads">
+        { this.props.user &&  <Editor onSubmit={this.addThread} />}
         { this.props.threads.map( thread => {
           return (
             <Thread
