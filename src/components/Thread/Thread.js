@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import moment from 'moment'
+import {Icon} from 'antd'
+import Markdown from 'react-markdown'
 import './Thread.css';
+
+import firebase from '../../firebase.js';
 
 import { Card } from 'antd';
 
 class Thread extends Component {
-
-  getDate(timestamp){
-    let d = new Date(timestamp)
-    return  d.toISOString()
-  }
 
   numOfLikes(){
     if ( this.props.data.likes !== undefined ){
@@ -25,17 +25,47 @@ class Thread extends Component {
     }
   }
 
+  handleLike(ev){
+    let key = this.props.postKey
+    ev.stopPropagation();
+    if (this.props.user){
+      let threadLikeRef = firebase.database().ref('threads/' + key + '/likes/' + this.props.user.uid)
+      threadLikeRef.once('value', snap => {
+        let sval = snap.val()
+        let statusVal = true
+        if (sval != null)
+          statusVal = !sval
+        snap.ref.set(statusVal)
+        let userLikeRef = firebase.database().ref('users/' + this.props.user.uid + '/likes/' + key)
+        userLikeRef.set(statusVal)
+      })
+    }
+  }
+
   render(){
+    let title = this.props.data.title
+    let content = this.props.data.content
+    let border = this.props.bordered ? this.props.bordered : false
+    if (this.props.data.user === undefined){
+      return (<pre>Loading...</pre>)
+    }
     return (
       <div className="Thread" onClick={this.props.handleClick}>
-{/* <Card style={{ width: 300 }}> */}
-  <Card>
+  <Card bordered={border} >
+    <pre><h1>{title}</h1></pre>
+    <br/>
+    <br/>
+      <div className="Thread-content reset-this">
+      <Markdown className="Thread-content-markdown" source={content} />
+    </div>
+        <div className="Thread-footer">
+          <div className="Thread-footer-elements">
+        <p className="Thread-footer-element">{this.props.data.user.displayName}</p>
+        <p className="Thread-footer-element">{ moment(this.props.data.createdAt).fromNow() }</p>
+      </div>
         <img className="Thread-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
-        <p>{this.props.data.user.displayName}</p>
-        <p>{ this.getDate(this.props.data.createdAt) }</p>
-        <button onClick={this.props.handleLike}> Likes: { this.numOfLikes() }</button>
-        <p>{ this.props.data.title }</p>
-        <p>{ this.props.data.content } </p>
+        <p className="Thread-like" onClick={this.handleLike.bind(this)}> <Icon type="like" /> { this.numOfLikes() }</p>
+        </div>
       </Card>
       </div>
       )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd'
 import './User.css'
 
 import firebase, { auth, provider } from '../../firebase.js';
@@ -84,12 +85,12 @@ class User extends Component {
       <div className="User">
         {this.state.user ?
           <div>
-          <img className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
-            <p className="User-name">{ this.state.user.displayName }</p>
-            <button onClick={this.logout}>Log Out</button>
+            <pre className="User-name">{ this.state.user.displayName } </pre>
+          <img onClick={this.logout} className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+            {/* <button onClick={this.logout}>Log Out</button> */}
           </div>
         :
-          <button onClick={this.login}>Log In</button>
+          <Button onClick={this.login}>Log In</Button>
         }
         </div>
         );

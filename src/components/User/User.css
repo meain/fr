@@ -1,9 +1,15 @@
 .User{
-    border: 1px solid firebrick;
+    display: inline-block;
 }
 .User-image{
     width: 50px;
     height: auto;
-    border-radius: 50px;
-    float: left;
+    /* border-radius: 50px; */
+    /* float: left; */
+    margin-left: 10px;
+    display: inline-block;
+}
+.User-name{
+    display: inline-block;
+    font-size: 20px;
 }

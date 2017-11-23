@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-// import './ThreadDetails.css';
+import ReactMarkdown from 'react-markdown'
+import './ThreadDetails.css';
 
 import firebase from '../../firebase.js';
 import { updateThreads, userChanged } from '../../reducers.js'
@@ -9,6 +9,7 @@ import { getThread } from '../../getters.js'
 
 import Editor from '../Editor/Editor';
 import Post from '../Post/Post'
+import Thread from '../Thread/Thread'
 
 class ThreadDetails extends Component {
   constructor(props){
@@ -18,39 +19,7 @@ class ThreadDetails extends Component {
       posts: [] // Loaded here on demand
     }
 
-    this.handleLike = this.handleLike.bind(this)
     this.addPost = this.addPost.bind(this)
-  }
-
-  handleLike(ev){
-    if (this.props.user){
-      let threadLikeRef = firebase.database().ref('threads/' + this.state.key + '/likes/' + this.props.user.uid)
-      threadLikeRef.once('value', snap => {
-        let sval = snap.val()
-        let statusVal = true
-        if (sval != null)
-          statusVal = !sval
-        snap.ref.set(statusVal)
-        let userLikeRef = firebase.database().ref('users/' + this.props.user.uid + '/likes/' + this.state.key)
-        userLikeRef.set(statusVal)
-      })
-    }
-  }
-
-  numOfLikes(){
-    // Once we pass like in from the top, this will change to this.props.data.like ?? idk
-    if ( this.props.thread.likes !== undefined ){
-      let likes = 0
-      for (let i in this.props.thread.likes) {
-        if (this.props.thread.likes[i] === true){
-          likes += 1
-        }
-      }
-      return likes
-    }
-    else{
-      return 0
-    }
   }
 
   componentDidMount(){
@@ -100,21 +69,27 @@ class ThreadDetails extends Component {
   }
 
   render(){
+    console.log('this.state: ', this.state);
+    console.log('this.props: ', this.props);
     return(
-      <div>
-        Thread details : { this.state.key }
-        <h1>{this.props.thread.title}</h1>
-        <p>{ this.props.thread.content }</p>
-        <button onClick={this.handleLike}> Likes: { this.numOfLikes() }</button>
-        {/* { this.state.posts.length===0 ? ({ this.props.user && <Editor onSubmit={this.addPost}/>}) : (<h1>Answered</h1>) } */}
+      <div className="ThreadDetails">
+        <Thread
+          key={this.state.key}
+          user={this.props.user}
+          postKey={this.state.key}
+          data={this.props.thread}
+          handleClick={(e) => {}}
+        />
+        <br/>
+        <br/>
       {this.props.user && this.state.posts.length===0 && <Editor onSubmit={this.addPost}/>}
-        { this.state.posts.map( (post, i) => {
-          return (
-            <Post key={i} data={post} />
-          )
-        } ) }
+      { this.state.posts.map( (post, i) => {
+        return (
+          <Post key={i} data={post} />
+        )
+      } ) }
       </div>
-    )
+  )
   }
 }
 
