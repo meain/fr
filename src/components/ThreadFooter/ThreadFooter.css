@@ -6,6 +6,21 @@
     width: 100%;
     height: 50px;
 }
+.ThreadFooter-docked {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 1);
+    font-family: monaco, meleno, monospace;
+    float: left;
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    z-index: 100;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 .ThreadFooter-user-image {
     width: 50px;

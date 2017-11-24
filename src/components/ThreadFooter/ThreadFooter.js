@@ -48,7 +48,7 @@ handleLike(ev) {
 
     render(){
         return(
-            <div className="ThreadFooter">
+            <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
                 <div className="ThreadFooter-elements">
                     <p>{this.props.data.user.displayName}</p>
                     <p>{moment(this.props.data.createdAt).fromNow()}</p>

@@ -95,6 +95,7 @@ class ThreadDetails extends Component {
           postKey={this.state.key}
           data={this.props.thread}
           hasHeading={true}
+          dockBottom={true}
           handleClick={(e) => { }}
         />
         {

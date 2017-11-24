@@ -24,7 +24,7 @@ class Thread extends Component {
           { this.props.data.posts && <mark>Answered</mark>}
           <hr className="Thread-seperator" />
           <Markdown className={"Thread-content-markdown " + (this.props.zoomout ? "zoomout" : "" )} source={content} />
-          <ThreadFooter user={this.props.user} postKey={this.props.postKey} data={this.props.data} />
+          <ThreadFooter dockBottom={this.props.dockBottom} user={this.props.user} postKey={this.props.postKey} data={this.props.data} />
         </fieldset>
       </div>
     )
