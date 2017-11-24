@@ -9,6 +9,16 @@
   margin-left: -19%;
 }
 
+.ThreadList-ask{
+  text-align: center;
+  width: 100%;
+}
+
+.ThreadList-search-ask{
+  text-align: right;
+  width: 100%;
+}
+
 @media only screen and (max-width: 700px) {
   .App-content {
     width: 100%;

@@ -1,5 +1,4 @@
 .Thread {
-  /* border: 1px solid green; */
   margin-top: 5px;
 }
 
@@ -17,12 +16,12 @@
 .Thread-content {
   text-align: left;
   width: 100%;
-  overflow: scroll;
 }
 
 .zoomout {
   zoom: 0.75;
 }
+
 .Thread-content-markdown p img {
   max-width: 100%;
 }

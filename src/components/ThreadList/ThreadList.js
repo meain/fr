@@ -11,7 +11,7 @@ import Thread from '../Thread/Thread'
 
 class ThreadList extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -32,17 +32,17 @@ class ThreadList extends Component {
     this.props.history.push('/thread/' + key)
   }
 
-  searchChange(e){
-    this.setState({search:e.target.value})
+  searchChange(e) {
+    this.setState({ search: e.target.value })
     console.log(e.target.value)
   }
 
-  getDisplayThreads(){
+  getDisplayThreads() {
     // Search in title, if nothing search in content
     let search = this.state.search
     let threads = this.props.threads
     threads = this.props.threads.filter(thread => fuzzysearch(search.toLowerCase(), thread.data.title.toLowerCase()))
-    if (threads.length === 0){
+    if (threads.length === 0) {
       threads = this.props.threads.filter(thread => fuzzysearch(search.toLowerCase(), thread.data.content.toLowerCase()))
     }
     return threads
@@ -55,24 +55,40 @@ class ThreadList extends Component {
 
         <form className="form">
           <div className="form-item">
-            <input type="text" className="search ThreadList-search" 
-            onChange={this.searchChange} placeholder="Search" />
+            <input type="text" className="search ThreadList-search"
+              onChange={this.searchChange} placeholder="Search" />
+            {this.props.user && threads.length !== 0 &&
+              <div className="ThreadList-search-ask">
+                <kbd> Search for existing question or{' '}
+                  <Link to="/newPost" >
+                    ask a new question
+          </Link>
+                  .
+          </kbd>
+              </div>
+            }
           </div>
         </form>
+        {this.props.user && threads.length === 0 &&
+          <div className="ThreadList-ask">
+            <kbd> Looks like we don't have what you are looking for, would you like to{' '}
+              <Link to="/newPost" >
+                ask a question
+          </Link>
+              ?
+          </kbd>
+          </div>
+        }
 
-          {/* {this.props.user && <Link to="/newPost" >
-            <button className="button" type="primary">New Question</button>
-          </Link>} */}
-
-        {threads.map(thread => 
-            <Thread
-              key={thread.id}
-              user={this.props.user}
-              postKey={thread.id}
-              data={thread.data}
-              bordered={true}
-              handleClick={(e) => this.handleClick(e, thread.id)}
-            />
+        {threads.map(thread =>
+          <Thread
+            key={thread.id}
+            user={this.props.user}
+            postKey={thread.id}
+            data={thread.data}
+            bordered={true}
+            handleClick={(e) => this.handleClick(e, thread.id)}
+          />
         )}
       </div>
     )

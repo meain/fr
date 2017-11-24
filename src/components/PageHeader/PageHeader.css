@@ -21,18 +21,7 @@
 .PageHeader-hero {
   cursor: pointer;
   font-size: 40px !important;
+  font-family: 'Warnes', Arial, Helvetica, sans-serif;
   /* background-color: black;
   color: white; */
 }
-
-/* @media only screen and (max-width: 600px) {
-.PageHeader-hero {
-  font-size: 25px !important;
-}
-}
-
-@media only screen and (max-width: 500px) {
-.PageHeader-hero {
-  font-size: 15px !important;
-}
-} */
