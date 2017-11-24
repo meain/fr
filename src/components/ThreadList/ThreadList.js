@@ -34,7 +34,6 @@ class ThreadList extends Component {
 
   searchChange(e) {
     this.setState({ search: e.target.value })
-    console.log(e.target.value)
   }
 
   getDisplayThreads() {

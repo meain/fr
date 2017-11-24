@@ -6,13 +6,26 @@ import './ThreadFooter.css'
 
 import firebase from '../../firebase.js';
 
-class ThreadFooter extends Component{
-    constructor(props){
-        super(props)
-        
-        this.numOfLikes = this.numOfLikes.bind(this)
-        this.handleLike = this.handleLike.bind(this)
+class ThreadFooter extends Component {
+  constructor(props) {
+    super(props)
+
+    this.numOfLikes = this.numOfLikes.bind(this)
+    this.handleLike = this.handleLike.bind(this)
+    this.state = {
+      user: {}
     }
+  }
+
+
+  componentDidMount() {
+    let uid = this.props.data.user
+    firebase.database().ref('users/' + uid).once('value', snap => {
+      this.setState({
+        user: snap.val()
+      })
+    })
+  }
 
   numOfLikes() {
     if (this.props.data.likes !== undefined) {
@@ -29,7 +42,7 @@ class ThreadFooter extends Component{
     }
   }
 
-handleLike(ev) {
+  handleLike(ev) {
     let key = this.props.postKey
     ev.stopPropagation();
     if (this.props.user) {
@@ -46,24 +59,24 @@ handleLike(ev) {
     }
   }
 
-    render(){
-        return(
-            <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
-                <div className="ThreadFooter-elements">
-                    <p>{this.props.data.user.displayName}</p>
-                    <p>{moment(this.props.data.createdAt).fromNow()}</p>
-                </div>
-                <img className="ThreadFooter-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
-                <p className="ThreadFooter-like" onClick={this.handleLike}> 
-                { this.props.data.likes && this.props.data.likes[ this.props.user.uid ] === true ?
-                <Icon name="thumbs-up" /> 
-                :
-                <Icon name="thumbs-o-up" /> 
-                }
-                {' '}{this.numOfLikes()}</p>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
+        <div className="ThreadFooter-elements">
+          <p>{this.state.user.displayName}</p>
+          <p>{moment(this.props.data.createdAt).fromNow()}</p>
+        </div>
+        <img className="ThreadFooter-user-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
+        <p className="ThreadFooter-like" onClick={this.handleLike}>
+          {this.props.data.likes && this.props.data.likes[this.props.user.uid] === true ?
+            <Icon name="thumbs-up" />
+            :
+            <Icon name="thumbs-o-up" />
+          }
+          {' '}{this.numOfLikes()}</p>
+      </div>
+    )
+  }
 }
 
 export default ThreadFooter

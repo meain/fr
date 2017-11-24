@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+
 import './Editor.css';
 
-// import { Input, Button } from 'antd'
 import SimpleMDE from 'react-simplemde-editor'
 
 class Editor extends Component {

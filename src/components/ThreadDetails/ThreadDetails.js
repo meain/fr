@@ -29,7 +29,7 @@ class ThreadDetails extends Component {
     var scrollCount = 0,
       scrollMargin,
       scrollInterval = setInterval(function () {
-        if (window.scrollY != 0) {
+        if (window.scrollY !== 0) {
           scrollCount = scrollCount + 1;
           scrollMargin = cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
           window.scrollTo(0, (scrollHeight - scrollMargin));
@@ -71,12 +71,7 @@ class ThreadDetails extends Component {
         {
           content: data.content,
           createdAt: Date.now(),
-          user: {
-            uid: this.props.user.uid,
-            displayName: this.props.user.displayName,
-            email: this.props.user.email,
-            displayImage: this.props.user.photoURL
-          }
+          user: this.props.user.uid,
         };
       const key = firebase.database().ref('posts').push(post).key;
       // Add theard data to user

@@ -25,12 +25,7 @@ class NewThead extends Component{
           posts: [],  // Sub posts, we will most probably have only one ( jsut in case )
           likes: [],  // Will contain user uids
           stars: [],  // Bookmark question ( implement later )
-          user: {
-            uid: this.props.user.uid,
-            displayName: this.props.user.displayName,
-            email: this.props.user.email,
-            displayImage: this.props.user.photoURL
-          }
+          user: this.props.user.uid,
         };
       const key = firebase.database().ref('threads').push(thread).key;
       console.log('key: ', key);
