@@ -81,7 +81,7 @@ class ThreadDetails extends Component {
   }
 
   render() {
-    let showEditor = this.props.user && this.state.posts.length > 0
+    let showEditor = this.props.user !== null && this.state.posts.length === 0
     return (
       <div className="ThreadDetails">
         <Thread
@@ -93,16 +93,15 @@ class ThreadDetails extends Component {
           dockBottom={true}
           handleClick={(e) => { }}
         />
+        <fieldset>
+          <legend>Answer</legend>
+          {this.state.posts.map((post, i) => <Post key={i} data={post} />)}
+        </fieldset>
         {
-          showEditor ?
-            <fieldset>
-              <legend>Answer</legend>
-              {this.state.posts.map((post, i) => <Post key={i} data={post} />)}
-            </fieldset>
-            :
-            <Editor
-              title="Add answer"
-              onSubmit={this.addPost} />
+          showEditor &&
+          <Editor
+            title="Add answer"
+            onSubmit={this.addPost} />
         }
       </div>
     )
