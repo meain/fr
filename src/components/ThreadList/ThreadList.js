@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'antd'
+// import { Button } from 'antd'
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -32,7 +32,7 @@ class ThreadList extends Component {
       <div className="ThreadList">
 
         { this.props.user && <Link to="/newPost" >
-          <Button type="primary">New Question</Button>
+          <button className="button" type="primary">New Question</button>
           </Link>}
       <br/>
       <br/>

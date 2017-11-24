@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment'
-import {Icon} from 'antd'
+// import {Icon} from 'antd'
+import Icon from 'react-fa'
 import Markdown from 'react-markdown'
 import './Thread.css';
 
 import firebase from '../../firebase.js';
 
-import { Card } from 'antd';
+// import { Card } from 'antd';
 
 class Thread extends Component {
 
@@ -51,7 +52,7 @@ class Thread extends Component {
     }
     return (
       <div className="Thread" onClick={this.props.handleClick}>
-  <Card bordered={border} >
+  <div >
     <pre><h1>{title}</h1></pre>
     <br/>
     <br/>
@@ -64,9 +65,9 @@ class Thread extends Component {
         <p className="Thread-footer-element">{ moment(this.props.data.createdAt).fromNow() }</p>
       </div>
         <img className="Thread-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
-        <p className="Thread-like" onClick={this.handleLike.bind(this)}> <Icon type="like" /> { this.numOfLikes() }</p>
+        <p className="Thread-like" onClick={this.handleLike.bind(this)}> <Icon type="thumbs-up" /> { this.numOfLikes() }</p>
         </div>
-      </Card>
+      </div>
       </div>
       )
   }

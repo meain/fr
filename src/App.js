@@ -6,8 +6,8 @@ import './App.css';
 import { updateThreads, userChanged } from './reducers.js'
 import firebase from './firebase.js'
 
-import 'antd/dist/antd.css';
-import { BackTop } from 'antd'
+// import 'antd/dist/antd.css';
+// import { BackTop } from 'antd'
 
 import 'react-simplemde-editor/dist/simplemde.min.css'
 
@@ -24,11 +24,15 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <BackTop/>
+          {/* <BackTop/> */}
       <PageHeader />
 
           <br/>
-
+<form className="form">
+    <div className="form-item">
+      <input type="text" className="search" />
+    </div>
+</form>
           <br/>
           <div>
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Editor.css';
 
-import { Input, Button } from 'antd'
+// import { Input, Button } from 'antd'
 import SimpleMDE from 'react-simplemde-editor'
 
 class Editor extends Component {
@@ -21,7 +21,7 @@ class Editor extends Component {
     const content = this.state.content
     if(content.length > 0){
       if(this.props.hasHeading){
-        const title = this.titleInput.refs.input.value
+        const title = this.titleInput.value
         if (title.length > 0 && content.length > 0){
           const data = {
             title,
@@ -47,23 +47,44 @@ class Editor extends Component {
   }
 
   render(){
-    let title = this.props.title ? this.props.title : ""
+    let title = this.props.title ? this.props.title : "New Question"
     return (
       <div className="Editor">
-        { title && <pre><h1>{title}</h1></pre> }
-        { this.props.hasHeading &&
-        <div>
-          <Input ref={(ref) => {this.titleInput = ref}} className="Editor-heading" addonBefore="Heading" defaultValue="" />
-        <br/>
-        <br/>
-      </div>
-          }
-        {/* <Input className="Editor-heading" addonBefore="Heading" defaultValue="" /> */}
+
+
+
+<fieldset>
+    <legend>{title}</legend>
+    <div className="form-item">
+        <label>Title</label>
+        {/* <input type="email" name="user-email" className="w50" /> */}
+        <input ref={(ref) => {this.titleInput = ref}} type="text" />
+    </div>
+    <div className="form-item">
+        <label>Question</label>
+        {/* <input type="password" name="user-password" className="w50"/> */}
         <SimpleMDE
           onChange={this.handleChange}
         />
+    </div>
+</fieldset>
+
+
+
+{/* <Input ref={(ref) => {this.titleInput = ref}} className="Editor-heading" addonBefore="Heading" defaultValue="" /> */}
+
+{/* <form className="form"> */}
+{/*     <div className="form-item"> */}
+{/*     </div> */}
+{/* </form> */}
+
+        <br/>
+        <br/>
+          }
+        {/* <Input className="Editor-heading" addonBefore="Heading" defaultValue="" /> */}
         {/* <textarea ref={ref => { this.contentInput = ref }} /> */}
-        <Button onClick={this.handleClick}> Submit </Button>
+{/*<Button onClick={this.handleClick}> Submit </Button>*/}
+<button onClick={this.handleClick} className="button">Submit</button>
         {/* Quick hack with the br */}
         <br/>
         <br/>

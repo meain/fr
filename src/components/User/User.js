@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'antd'
+// import { Button } from 'antd'
 import './User.css'
 
 import firebase, { auth, provider } from '../../firebase.js';
@@ -90,7 +90,7 @@ class User extends Component {
             {/* <button onClick={this.logout}>Log Out</button> */}
           </div>
         :
-          <Button onClick={this.login}>Log In</Button>
+          <button className="button" onClick={this.login}>Log In</button>
         }
         </div>
         );
