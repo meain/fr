@@ -10,7 +10,7 @@ class Post extends Component {
   render() {
     return (
       <div>
-        <samp> Answered {moment(this.props.data.createdAt).fromNow()} by {this.props.data.user.displayName}</samp>
+        <samp> Answered by {this.props.data.user.displayName} {' '} {moment(this.props.data.createdAt).fromNow()}</samp>
         <br />
         <Markdown className="Post-content-markdown" source={this.props.data.content} />
       </div>

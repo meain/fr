@@ -40,7 +40,6 @@ class Editor extends Component {
   }
 
   handleChange(data) {
-    // console.log('data: ', data);
     this.setState({
       content: data
     })
@@ -58,12 +57,14 @@ class Editor extends Component {
             </div>
           }
           <div className="form-item">
+          {this.props.hasHeading &&
             <label>Summary</label>
+          }
             <SimpleMDE
               onChange={this.handleChange}
             />
           </div>
-          <button onClick={this.handleClick} className="button" style={{ float: "right" }}>Submit</button>
+          <button onClick={this.handleClick} className="button outline secondary" style={{ float: "right" }}>Submit</button>
         </fieldset>
       </div>
     )

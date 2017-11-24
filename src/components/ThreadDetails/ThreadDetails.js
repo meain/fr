@@ -86,7 +86,7 @@ class ThreadDetails extends Component {
   }
 
   render() {
-    let showEditor = this.props.user && this.state.posts
+    let showEditor = this.props.user && this.state.posts.length > 0
     return (
       <div className="ThreadDetails">
         <Thread
