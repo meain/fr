@@ -86,7 +86,7 @@ class User extends Component {
           <div>
             <div className="User-details">
               <p>
-                <span className="muted monospace">{this.state.user.displayName} </span>
+                <span className="strong monospace">{this.state.user.displayName} </span>
               </p>
               <p>
                 <span className="muted monospace" style={{ paddingBottom: 10 }}>{this.state.user.email} </span>

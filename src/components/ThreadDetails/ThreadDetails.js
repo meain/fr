@@ -103,6 +103,7 @@ class ThreadDetails extends Component {
             title="Add answer"
             onSubmit={this.addPost} />
         }
+        <br />
       </div>
     )
   }

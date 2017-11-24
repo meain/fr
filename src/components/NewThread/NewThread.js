@@ -38,8 +38,8 @@ class NewThead extends Component{
   render(){
     return(
       <div className="NewThread">
-        <h1>New Question</h1>
         <br/>
+        <h2>New Question</h2>
         <Editor hasHeading={true} onSubmit={this.addThread} />
       </div>
     )

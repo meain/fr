@@ -63,8 +63,16 @@ class ThreadFooter extends Component {
     return (
       <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
         <div className="ThreadFooter-elements">
-          <p>{this.state.user.displayName}</p>
-          <p>{moment(this.props.data.createdAt).fromNow()}</p>
+          <p>
+            <span className="strong monospace">
+              {this.state.user.displayName}
+            </span>
+          </p>
+          <p>
+            <span className="muted monospace">
+              {moment(this.props.data.createdAt).fromNow()}
+            </span>
+          </p>
         </div>
         <img className="ThreadFooter-user-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
         <p className="ThreadFooter-like" onClick={this.handleLike}>

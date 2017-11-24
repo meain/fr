@@ -33,11 +33,11 @@
     height: 50px;
     display: inline-block;
     text-align: left;
-    padding: 1px;
-    padding-left: 7px;
+    padding: 15px;
+    padding-left: 20px;
 }
 .ThreadFooter-elements p{
-    margin: 0;
+    margin: -10px;
 }
 
 .ThreadFooter-like {
