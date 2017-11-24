@@ -54,7 +54,13 @@ handleLike(ev) {
                     <p>{moment(this.props.data.createdAt).fromNow()}</p>
                 </div>
                 <img className="ThreadFooter-user-image" src={this.props.data.user.displayImage} alt={this.props.data.user.displayName} />
-                <p className="ThreadFooter-like" onClick={this.handleLike}> <Icon name="thumbs-up" /> {this.numOfLikes()}</p>
+                <p className="ThreadFooter-like" onClick={this.handleLike}> 
+                { this.props.data.likes && this.props.data.likes[ this.props.user.uid ] === true ?
+                <Icon name="thumbs-up" /> 
+                :
+                <Icon name="thumbs-o-up" /> 
+                }
+                {' '}{this.numOfLikes()}</p>
             </div>
         )
     }
