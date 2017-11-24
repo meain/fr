@@ -6,6 +6,7 @@
     "firebase": "^4.6.2",
     "moment": "^2.19.2",
     "react": "^16.1.1",
+    "react-back-top": "^1.0.4",
     "react-dom": "^16.1.1",
     "react-fa": "^5.0.0",
     "react-markdown": "^3.0.1",

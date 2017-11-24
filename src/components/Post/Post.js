@@ -7,16 +7,12 @@ import './Post.css'
 
 
 class Post extends Component {
-  render(){
+  render() {
     return (
       <div>
-        {/* <p>{this.props.data.content}</p> */}
-      <Markdown className="Post-content-markdown" source={this.props.data.content} />
-      <br/>
-      <br/>
-      <br/>
-        <p>{ moment(this.props.data.createdAt).fromNow() }</p>
-        <p>{ this.props.data.user.displayName }</p>
+        <samp> Answered {moment(this.props.data.createdAt).fromNow()} by {this.props.data.user.displayName}</samp>
+        <br />
+        <Markdown className="Post-content-markdown" source={this.props.data.content} />
       </div>
     )
   }

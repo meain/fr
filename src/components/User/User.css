@@ -1,15 +1,20 @@
 .User{
     display: inline-block;
 }
+.User-details{
+    display: inline-block;
+    text-align: right;
+    padding-bottom: 5px;
+}
+.User-details p{
+    margin-bottom: 0px;
+}
 .User-image{
     width: 50px;
     height: auto;
-    /* border-radius: 50px; */
-    /* float: left; */
     margin-left: 10px;
     display: inline-block;
 }
 .User-name{
-    display: inline-block;
     font-size: 20px;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Button } from 'antd'
+import Icon from 'react-fa'
 import './User.css'
 
 import firebase, { auth, provider } from '../../firebase.js';
@@ -16,7 +16,7 @@ class User extends Component {
     this.logout = this.logout.bind(this);
   }
 
-  addUserToDB(user){
+  addUserToDB(user) {
     let userRef = firebase.database().ref('users/' + user.uid)
     let userInfo = {
       "displayName": user.displayName,
@@ -31,7 +31,6 @@ class User extends Component {
       "admin": false,  // Can be only changed from firebase console
     }
     userRef.once('value', snap => {
-      console.log('snap.val(): ', snap.val());
       const d = snap.val()
       if (d != null) {
         // firebase does not create space for empty values
@@ -85,15 +84,21 @@ class User extends Component {
       <div className="User">
         {this.state.user ?
           <div>
-            <pre className="User-name">{ this.state.user.displayName } </pre>
-          <img onClick={this.logout} className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
-            {/* <button onClick={this.logout}>Log Out</button> */}
+            <div className="User-details">
+              <p>
+                <span className="muted monospace">{this.state.user.displayName} </span>
+              </p>
+              <p>
+                <span className="muted monospace" style={{ paddingBottom: 10 }}>{this.state.user.email} </span>
+              </p>
+            </div>
+            <img onClick={this.logout} className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
           </div>
-        :
-          <button className="button" onClick={this.login}>Log In</button>
+          :
+          <button className="button secondary outline" style={{ marginTop: 5 }} onClick={this.login}><Icon name="sign-in" />  Login</button>
         }
-        </div>
-        );
+      </div>
+    );
   }
 
 }

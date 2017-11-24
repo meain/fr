@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import ReactMarkdown from 'react-markdown'
 import './ThreadDetails.css';
 
 import firebase from '../../firebase.js';
@@ -12,7 +11,7 @@ import Post from '../Post/Post'
 import Thread from '../Thread/Thread'
 
 class ThreadDetails extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       key: window.location.pathname.split('/')[2],
@@ -22,9 +21,9 @@ class ThreadDetails extends Component {
     this.addPost = this.addPost.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let posts = this.props.thread.posts
-    if (posts){
+    if (posts) {
       let key = Object.keys(posts)[0]
       let postRef = firebase.database().ref("posts/" + key)
       postRef.once('value', snap => {
@@ -35,9 +34,9 @@ class ThreadDetails extends Component {
     }
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps(props) {
     let posts = props.thread.posts
-    if (posts){
+    if (posts) {
       let key = Object.keys(posts)[0]
       let postRef = firebase.database().ref("posts/" + key)
       postRef.once('value', snap => {
@@ -48,7 +47,7 @@ class ThreadDetails extends Component {
     }
   }
 
-  addPost(data){
+  addPost(data) {
     if (this.props.user) {
       const post =
         {
@@ -68,10 +67,9 @@ class ThreadDetails extends Component {
     }
   }
 
-  render(){
-    console.log('this.state: ', this.state);
-    console.log('this.props: ', this.props);
-    return(
+  render() {
+    let showEditor = this.props.user && this.state.posts
+    return (
       <div className="ThreadDetails">
         <Thread
           key={this.state.key}
@@ -79,25 +77,23 @@ class ThreadDetails extends Component {
           postKey={this.state.key}
           data={this.props.thread}
           hasHeading={true}
-          handleClick={(e) => {}}
+          handleClick={(e) => { }}
         />
-        <br/>
-        <br/>
-        {this.props.user && this.state.posts.length===0 &&
-          <Editor
-          title="Add answer"
-          onSubmit={this.addPost}/>}
-      { this.state.posts.map( (post, i) => {
-        return (
-          <Post key={i} data={post} />
-        )
-      } ) }
+        {
+          showEditor ?
+            <fieldset>
+              <legend>Answer</legend>
+              {this.state.posts.map((post, i) => <Post key={i} data={post} />)}
+            </fieldset>
+            :
+            <Editor
+              title="Add answer"
+              onSubmit={this.addPost} />
+        }
       </div>
-  )
+    )
   }
 }
-
-// export default ThreadDetails
 
 const mapStateToProps = state => {
   return {

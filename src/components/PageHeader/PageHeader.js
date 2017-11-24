@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { userChanged } from '../../reducers.js'
-import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import './PageHeader.css'
@@ -8,7 +8,7 @@ import './PageHeader.css'
 import User from '../User/User'
 
 class PageHeader extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.handleAuth = this.handleAuth.bind(this)
   }
@@ -17,16 +17,21 @@ class PageHeader extends Component {
     this.props.userChanged(user)
   }
 
-  render(){
+  render() {
+    const Hero = withRouter(({ history }) => (
+      <span className="strong PageHeader-hero" onClick={() => { history.push('/') }} style={{ fontFamily: "Autour One" }}>Kerala AI</span>
+    ))
     return (
       <div className="PageHeader">
         <div className="PageHeader-logo">
-          <h1><pre><Link to="/">Kerala AI</Link></pre></h1>
+          <p style={{ padding: 12 }}>
+            <Hero />
+          </p>
         </div>
         <div className="PageHeader-user">
           <User handle={this.handleAuth} />
         </div>
-        </div>
+      </div>
     )
   }
 

@@ -1,0 +1,34 @@
+.ThreadFooter {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.336);
+    font-family: monaco, meleno, monospace;
+    float: left;
+    width: 100%;
+    height: 50px;
+}
+
+.ThreadFooter-user-image {
+    width: 50px;
+    height: auto;
+    border-radius: 50px 0 0 50px;
+    float: right;
+}
+
+.ThreadFooter-elements {
+    height: 50px;
+    display: inline-block;
+    text-align: left;
+    padding: 1px;
+    padding-left: 7px;
+}
+.ThreadFooter-elements p{
+    margin: 0;
+}
+
+.ThreadFooter-like {
+    user-select: none;
+    font-size: 25px;
+    float: right;
+    margin-right: 70px;
+    padding: 11px;
+}
