@@ -60,6 +60,7 @@ class ThreadFooter extends Component {
   }
 
   render() {
+    let userLiked = this.props.data.likes && this.props.data.likes[this.props.user.uid] === true
     return (
       <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
         <div className="ThreadFooter-elements">
@@ -76,11 +77,7 @@ class ThreadFooter extends Component {
         </div>
         <img className="ThreadFooter-user-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
         <p className="ThreadFooter-like" onClick={this.handleLike}>
-          {this.props.data.likes && this.props.data.likes[this.props.user.uid] === true ?
-            <Icon name="thumbs-up" />
-            :
-            <Icon name="thumbs-o-up" />
-          }
+            <Icon name="thumbs-o-up" className={ userLiked ? "color-red" : "" } />
           {' '}{this.numOfLikes()}</p>
       </div>
     )
