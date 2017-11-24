@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^4.6.2",
+    "fuzzysearch": "^1.0.3",
     "moment": "^2.19.2",
     "react": "^16.1.1",
     "react-back-top": "^1.0.4",

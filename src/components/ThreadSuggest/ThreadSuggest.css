@@ -1,0 +1,7 @@
+.react-autosuggest__container input{
+    width: 102vw;
+    margin-left: -13px;
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+}

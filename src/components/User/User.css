@@ -15,6 +15,9 @@
     margin-left: 10px;
     display: inline-block;
 }
-.User-name{
-    font-size: 20px;
+
+@media only screen and (max-width: 500px) {
+    .User-details{
+        display: none;
+    }
 }

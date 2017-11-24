@@ -1,3 +1,20 @@
-.ThreadList{
+.ThreadList {
   padding-top: 100px;
+}
+
+.ThreadList-search {
+  width: 110vw;
+  background-position-x: 25px !important;
+  padding-left: 55px !important;
+  margin-left: -19%;
+}
+
+@media only screen and (max-width: 700px) {
+  .App-content {
+    width: 100%;
+    margin-left: 0;
+  }
+  .ThreadList-search {
+    margin-left: -13px;
+  }
 }
