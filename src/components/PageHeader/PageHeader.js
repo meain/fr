@@ -22,7 +22,7 @@ class PageHeader extends Component {
       <span className="strong PageHeader-hero" onClick={() => { history.push('/') }}>Kerala AI</span>
     ))
     return (
-      <div className="PageHeader">
+      <nav className="PageHeader">
         <div className="PageHeader-logo">
           <p style={{ padding: 12 }}>
             <Hero />
@@ -31,7 +31,7 @@ class PageHeader extends Component {
         <div className="PageHeader-user">
           <User handle={this.handleAuth} />
         </div>
-      </div>
+      </nav>
     )
   }
 
