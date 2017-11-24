@@ -66,8 +66,18 @@ class ThreadList extends Component {
           </kbd>
               </div>
             }
+        { !this.props.user && threads.length !== 0  &&
+              <div className="ThreadList-search-ask">
+            <kbd>Login to ask a question or just feel free to check out existing ones.</kbd>
+              </div>
+        }
           </div>
         </form>
+        { !this.props.user && threads.length === 0  &&
+          <div className="ThreadList-ask">
+            <kbd> Looks like we don't have what you are looking for. Login to ask a question.</kbd>
+          </div>
+        }
         {this.props.user && threads.length === 0 &&
           <div className="ThreadList-ask">
             <kbd> Looks like we don't have what you are looking for, would you like to{' '}
