@@ -60,7 +60,7 @@ class ThreadFooter extends Component {
   }
 
   render() {
-    let userLiked = this.props.data.likes && this.props.data.likes[this.props.user.uid] === true
+    let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
     return (
       <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
         <div className="ThreadFooter-elements">
