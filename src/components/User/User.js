@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Icon from 'react-fa'
+
 import './User.css'
 
 import firebase, { auth, provider } from '../../firebase.js';
@@ -9,11 +10,13 @@ class User extends Component {
     super(props)
 
     this.state = {
-      user: null
+      user: null,
+      dropdownOpen: false,
     }
 
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this)
   }
 
   addUserToDB(user) {
@@ -79,12 +82,19 @@ class User extends Component {
     });
   }
 
+  toggleDropdown() {
+    this.setState({
+      ...this.state,
+      dropdownOpen: !this.state.dropdownOpen
+    })
+  }
+
   render() {
     return (
       <div className="User">
         {this.state.user ?
-          <div>
-            <div className="User-details">
+          <div onClick={this.toggleDropdown} >
+            <div className="User-details" >
               <p>
                 <span className="strong monospace">{this.state.user.displayName} </span>
               </p>
@@ -92,7 +102,26 @@ class User extends Component {
                 <span className="muted monospace" style={{ paddingBottom: 10 }}>{this.state.user.email} </span>
               </p>
             </div>
-            <img onClick={this.logout} className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+            <img className="User-image" src={this.state.user.photoURL} alt={this.state.user.displayName} />
+            {!this.state.dropdownOpen ?
+              <div>
+              </div>
+              :
+              <div className="User-dropdown">
+                <div className="User-dropdown-elements">
+                  <p>
+                    <span className="muted">Profile</span>
+                  </p>
+                  <p>
+                    <span className="muted">Likes</span>
+                  </p>
+                  <hr />
+                  <p>
+                  <span onClick={this.logout} >Logout</span>
+                  </p>
+                </div>
+              </div>
+            }
           </div>
           :
           <button className="button secondary outline" style={{ marginTop: 5 }} onClick={this.login}><Icon name="sign-in" />  Login</button>
