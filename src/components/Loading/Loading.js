@@ -9,7 +9,7 @@ class Loading extends Component {
         super(props)
 
         this.state = {
-            loadingMessage: "Loading thread list. Just hang on.",
+            loadingMessage: props.initialMessage || "On my way!",
             loadingMessages: loadingMessages
         }
     }

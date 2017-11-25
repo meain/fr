@@ -3,6 +3,7 @@ import Markdown from 'react-markdown'
 import './Thread.css';
 
 import ThreadFooter from '../ThreadFooter/ThreadFooter'
+import Loading from '../Loading/Loading'
 
 class Thread extends Component {
 
@@ -10,12 +11,11 @@ class Thread extends Component {
     let title = this.props.data.title
     let content = this.props.data.content
     if (this.props.data.user === undefined) {
-      return (<pre>Loading...</pre>)
+      return (<Loading 
+        initialMessage="Loading question, Just a sec."
+      />)
     }
     let legend = "Question"
-    // if (this.props.data.posts){
-    //   legend = "Question  [ Answered ]"
-    // }
     return (
       <div className="Thread" onClick={this.props.handleClick}>
         <fieldset>

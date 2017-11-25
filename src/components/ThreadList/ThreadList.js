@@ -59,7 +59,9 @@ class ThreadList extends Component {
       <div className="ThreadList">
         {
           this.state.loading ?
-            <Loading />
+            <Loading 
+            initialMessage="Loading thread list. Just hang on."
+            />
             :
             <div>
               <form className="form">
