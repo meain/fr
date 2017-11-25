@@ -19,7 +19,8 @@ class Thread extends Component {
 
   doneLoading(){
     if (!this.state.messageBubbled){
-      this.props.doneLoading()
+      if (this.props.doneLoading)
+        this.props.doneLoading()
       this.setState({
         ...this.state,
         messageBubbled: true,
