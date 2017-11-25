@@ -92,21 +92,24 @@ class User extends Component {
   }
 
   render() {
-    const Profile = withRouter(({history}) => 
-    {
-      if (this.state.user){
+    const Profile = withRouter(({ history }) => {
+      if (this.state.user) {
         return (
-      <span 
-      className="muted" 
-      onClick={() => {history.push('/user/' + this.state.user.uid )}}>
-      Profile</span>
+          <p
+            onClick={() => { history.push('/user/' + this.state.user.uid) }}>
+            <span
+              onClick={() => { history.push('/user/' + this.state.user.uid) }}>
+              Profile</span>
+          </p>
         )
       }
-      else{
+      else {
         return (
-      <span 
-      className="muted">
-      Profile</span>
+          <p>
+            <span
+              className="muted">
+              ProfileN</span>
+          </p>
         )
       }
     }
@@ -130,18 +133,16 @@ class User extends Component {
               :
               <div className="User-dropdown">
                 <div className="User-dropdown-elements">
-                  <p>
-                    <Profile />
-                  </p>
-                  <p>
+                  <Profile />
+                  {/* <p>
                     <span className="muted">Questions</span>
                   </p>
                   <p>
                     <span className="muted">Likes</span>
-                  </p>
+                  </p> */}
                   <hr />
                   <p>
-                  <span onClick={this.logout} >Logout</span>
+                    <span onClick={this.logout} >Logout</span>
                   </p>
                 </div>
               </div>
