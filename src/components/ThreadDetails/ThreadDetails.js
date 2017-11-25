@@ -103,10 +103,12 @@ class ThreadDetails extends Component {
           doneLoading={this.doneLoading}
           handleClick={(e) => { }}
         />
+        { this.state.doneLoading && !showEditor &&
         <fieldset>
           <legend>Answer</legend>
           {this.state.posts.map((post, i) => <Post key={i} data={post} />)}
         </fieldset>
+        }
         {
           showEditor &&
           <Editor

@@ -60,17 +60,8 @@ class ThreadFooter extends Component {
     }
   }
 
-  // userImageClicked(){
-  //   ev.preventDefault()
-  //   console.log("clicked user image")
-  //   console.log(history.push)
-  //   history.push('/user/' + this.state.user.uid)
-  //   return true
-  // }
-
   render() {
     let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
-    console.log(this.state.user)
     const UserImage = withRouter(({ history }) => (
           <img className="ThreadFooter-user-image"
             src={this.state.user.displayImage}
