@@ -71,23 +71,12 @@ class ThreadFooter extends Component {
   render() {
     let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
     console.log(this.state.user)
-    let UserImage = withRouter(({ history }) => {
-      if (this.state.user.uid) {
-        return (
+    const UserImage = withRouter(({ history }) => (
           <img className="ThreadFooter-user-image"
             src={this.state.user.displayImage}
-            onClick={(ev) => {console.log(";;;;"); history.push('/user/' + this.state.user.uid)}}
+            onClick={(ev) => {ev.preventDefault(); ev.stopPropagation(); history.push('/user/' + this.state.user.uid)}}
             alt={this.state.user.displayName} />
-        )
-      }
-      else {
-        return (
-          <img className="ThreadFooter-user-image"
-            src={this.state.user.displayImage}
-            alt={this.state.user.displayName || "user image"} />
-        )
-      }
-    })
+    ))
     return (
       <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
         <div className="ThreadFooter-elements">

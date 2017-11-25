@@ -28,6 +28,7 @@ class App extends Component {
           shape="round"
           background="white" 
           color="black" 
+          position={{ bottom: '10%', right: '50%'}}
           topDistance={300}
           hover={{background:"black", color:"white"}}
           timing="easeIn"/>
