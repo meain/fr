@@ -1,52 +1,64 @@
-.User{
+.User {
     display: inline-block;
     background-color: white;
     margin-top: -2px;
 }
-.User-details{
+
+.User-details {
     display: inline-block;
     text-align: right;
     padding-bottom: 5px;
     user-select: none;
     cursor: pointer;
 }
-.User-details p{
+
+.User-details p {
     margin-bottom: -7px;
 }
-.User-image{
+
+.User-image {
     width: 50px;
     height: auto;
     margin-left: 10px;
     display: inline-block;
     cursor: pointer;
+    float: right;
 }
 
-.User-dropdown{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-left: 1px solid rgba(0, 0, 0, 0.05);
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+.User-dropdown {
+    right: 0;
+    position: fixed;
+    top: 60px;
+    background: white;
+    width: 200px;
 }
-.User-dropdown hr{
+
+.User-dropdown hr {
     margin-top: 0px;
     margin-bottom: 0px;
     width: 50%;
     display: inline-block;
 }
 
-.User-dropdown-elements{
+.User-dropdown-elements {
     padding: 10px;
     text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
-.User-dropdown-elements p{
+
+.User-dropdown-elements p {
     margin: 0px;
     cursor: pointer;
 }
-.User-dropdown-elements p:hover{
+
+.User-dropdown-elements p:hover {
     background-color: #f5f5f5;
 }
 
 @media only screen and (max-width: 500px) {
-    .User-details{
+    .User-details {
         display: none;
     }
 }
