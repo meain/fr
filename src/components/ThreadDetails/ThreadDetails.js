@@ -90,7 +90,8 @@ class ThreadDetails extends Component {
   }
 
   render() {
-    let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.state.doneLoading
+    // let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.state.doneLoading
+    let showEditor = this.props.user !== null && this.state.posts.length === 0
     return (
       <div className="ThreadDetails">
         <Thread
@@ -103,7 +104,7 @@ class ThreadDetails extends Component {
           doneLoading={this.doneLoading}
           handleClick={(e) => { }}
         />
-        { this.state.doneLoading && !showEditor &&
+        { !showEditor &&
         <fieldset>
           <legend>Answer</legend>
           {this.state.posts.map((post, i) => <Post key={i} data={post} />)}

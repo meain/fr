@@ -14,19 +14,19 @@ class Thread extends Component {
       messageBubbled: false,
     }
 
-    this.doneLoading = this.doneLoading.bind(this)
+    // this.doneLoading = this.doneLoading.bind(this)
   }
 
-  doneLoading(){
-    if (!this.state.messageBubbled){
-      if (this.props.doneLoading)
-        this.props.doneLoading()
-      this.setState({
-        ...this.state,
-        messageBubbled: true,
-      })
-    }
-  }
+  // doneLoading(){
+  //   if (!this.state.messageBubbled){
+  //     if (this.props.doneLoading)
+  //       this.props.doneLoading()
+  //     this.setState({
+  //       ...this.state,
+  //       messageBubbled: true,
+  //     })
+  //   }
+  // }
 
   render() {
     let title = this.props.data.title
@@ -36,7 +36,7 @@ class Thread extends Component {
         initialMessage="Loading question, Just a sec."
       />)
     }
-    this.doneLoading()
+    // this.doneLoading()
     let legend = "Question"
     return (
       <div className="Thread" onClick={this.props.handleClick}>
