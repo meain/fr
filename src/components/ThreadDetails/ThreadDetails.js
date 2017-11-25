@@ -15,10 +15,12 @@ class ThreadDetails extends Component {
     super(props)
     this.state = {
       key: window.location.pathname.split('/')[2],
-      posts: [] // Loaded here on demand
+      posts: [], // Loaded here on demand
+      doneLoading: false
     }
 
     this.addPost = this.addPost.bind(this)
+    this.doneLoading = this.doneLoading.bind(this)
     this.scrollToTop()
   }
 
@@ -65,6 +67,13 @@ class ThreadDetails extends Component {
     }
   }
 
+  doneLoading(){
+    this.setState({
+      ...this.state,
+      doneLoading: true,
+    })
+  }
+
   addPost(data) {
     if (this.props.user) {
       const post =
@@ -81,7 +90,7 @@ class ThreadDetails extends Component {
   }
 
   render() {
-    let showEditor = this.props.user !== null && this.state.posts.length === 0
+    let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.state.doneLoading
     return (
       <div className="ThreadDetails">
         <Thread
@@ -91,6 +100,7 @@ class ThreadDetails extends Component {
           data={this.props.thread}
           hasHeading={true}
           dockBottom={true}
+          doneLoading={this.doneLoading}
           handleClick={(e) => { }}
         />
         <fieldset>

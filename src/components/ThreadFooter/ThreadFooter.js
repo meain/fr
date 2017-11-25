@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment'
 import Icon from 'react-fa'
 
@@ -59,8 +60,34 @@ class ThreadFooter extends Component {
     }
   }
 
+  // userImageClicked(){
+  //   ev.preventDefault()
+  //   console.log("clicked user image")
+  //   console.log(history.push)
+  //   history.push('/user/' + this.state.user.uid)
+  //   return true
+  // }
+
   render() {
     let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
+    console.log(this.state.user)
+    let UserImage = withRouter(({ history }) => {
+      if (this.state.user.uid) {
+        return (
+          <img className="ThreadFooter-user-image"
+            src={this.state.user.displayImage}
+            onClick={(ev) => {console.log(";;;;"); history.push('/user/' + this.state.user.uid)}}
+            alt={this.state.user.displayName} />
+        )
+      }
+      else {
+        return (
+          <img className="ThreadFooter-user-image"
+            src={this.state.user.displayImage}
+            alt={this.state.user.displayName || "user image"} />
+        )
+      }
+    })
     return (
       <div className={"ThreadFooter" + (this.props.dockBottom ? "-docked" : "")}>
         <div className="ThreadFooter-elements">
@@ -75,9 +102,9 @@ class ThreadFooter extends Component {
             </span>
           </p>
         </div>
-        <img className="ThreadFooter-user-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
+        <UserImage />
         <p className="ThreadFooter-like" onClick={this.handleLike}>
-            <Icon name="thumbs-o-up" className={ userLiked ? "color-red" : "" } />
+          <Icon name="thumbs-o-up" className={userLiked ? "color-red" : ""} />
           {' '}{this.numOfLikes()}</p>
       </div>
     )

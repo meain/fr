@@ -15,6 +15,7 @@ class Thread extends Component {
         initialMessage="Loading question, Just a sec."
       />)
     }
+    // this.props.doneLoading()
     let legend = "Question"
     return (
       <div className="Thread" onClick={this.props.handleClick}>

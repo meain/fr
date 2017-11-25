@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Icon from 'react-fa'
 
 import './User.css'
@@ -22,6 +23,7 @@ class User extends Component {
   addUserToDB(user) {
     let userRef = firebase.database().ref('users/' + user.uid)
     let userInfo = {
+      "uid": user.uid,
       "displayName": user.displayName,
       "displayImage": user.photoURL,
       "lastLogin": Date.now(),
@@ -90,6 +92,25 @@ class User extends Component {
   }
 
   render() {
+    const Profile = withRouter(({history}) => 
+    {
+      if (this.state.user){
+        return (
+      <span 
+      className="muted" 
+      onClick={() => {history.push('/user/' + this.state.user.uid )}}>
+      Profile</span>
+        )
+      }
+      else{
+        return (
+      <span 
+      className="muted">
+      Profile</span>
+        )
+      }
+    }
+    )
     return (
       <div className="User">
         {this.state.user ?
@@ -110,7 +131,10 @@ class User extends Component {
               <div className="User-dropdown">
                 <div className="User-dropdown-elements">
                   <p>
-                    <span className="muted">Profile</span>
+                    <Profile />
+                  </p>
+                  <p>
+                    <span className="muted">Questions</span>
                   </p>
                   <p>
                     <span className="muted">Likes</span>

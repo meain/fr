@@ -1,0 +1,24 @@
+.UserDetails-unknown{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.UserDetails-user{
+    text-align: center;
+    padding: 20px;
+}
+.UserDetails-stuff{
+    padding: 20px;
+}
+.UserDetails-image{
+    border-radius: 500px;
+    padding-bottom: 20px;
+}
+.UserDetails-user fieldset hr{
+    width: 50%;
+    display: inline-block;
+}
+.UserDetails-none{
+    width: 100%;
+    text-align: center;
+}

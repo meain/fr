@@ -13,6 +13,7 @@ import 'react-simplemde-editor/dist/simplemde.min.css'
 
 import ThreadList from './components/ThreadList/ThreadList';
 import ThreadDetails from './components/ThreadDetails/ThreadDetails';
+import UserDetails from './components/UserDetails/UserDetails'
 import PageHeader from './components/PageHeader/PageHeader'
 import NewThread from './components/NewThread/NewThread'
 
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/" render={({history}) => (<ThreadList history={history}/>) } />
               <Route path="/newPost" render={ ({history}) => (<NewThread history={history} />) } />
           <Route path="/thread/:threadId" render={ () => (<ThreadDetails />) }/>
+          <Route path="/user/:userId" render={ () => (<UserDetails />) }/>
 
           </div>
         </div>
