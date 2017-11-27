@@ -151,24 +151,21 @@ class UserDetails extends Component {
                                             <img className="UserDetails-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
                                             { this.state.user.admin &&
                                                 <div>
-                                            <p><samp>ADMIN</samp></p>
-                                            <br />
+                                                    <p><samp>ADMIN</samp></p>
+                                                    <br />
                                                 </div>
                                             }
-                                            <p><span className="tag focus upper">Name </span>{' '}<span>{this.state.user.displayName}</span></p>
-                                            <hr />
-                                            <p><span className="tag error upper">Email </span>{' '}<span>{this.state.user.email}</span></p>
-                                            <hr />
                                             <p><span className="tag success upper">Likes </span>{' '}<span>{likes}</span></p>
-                                            <hr />
-                                            <p><span className="tag warning upper">Joined </span>{' '}<span>{moment(this.state.user.registeredAt).fromNow()}</span></p>
+                                            <p><span className="tag focus upper">Name </span>{' '}<span>{this.state.user.displayName}</span></p>
+                                            <p><span className="tag warning upper">Joined </span>{' '}<span>{moment(this.state.user.registeredAt).format('LL')}</span></p>
+                                            <p><span className="tag error upper">Email </span>{' '}<span>{this.state.user.email}</span></p>
                                         </fieldset>
                                     </div>
                                     <div className="col UserDetails-stuff">
                                         <fieldset>
                                             <legend>Questions</legend>
                                             { Object.keys(userQuestions).length > 0 ?
-                                            <table className="striped">
+                                            <table >
                                                 <tbody>
                                                     <tr>
                                                         <th>#</th>
@@ -188,14 +185,14 @@ class UserDetails extends Component {
                                             </table>
                                             :
                                             <p className="UserDetails-none">
-                                            <span className="muted">Well, the user has not asked any questions so far.</span>
+                                                <span className="muted">Well, the user has not asked any questions so far.</span>
                                             </p>
                                             }
                                         </fieldset>
                                         <fieldset>
                                             <legend>Likes</legend>
                                             { Object.keys(userLiked).length > 0 ?
-                                            <table className="striped">
+                                            <table >
                                                 <tbody>
                                                     <tr>
                                                         <th>#</th>
@@ -215,15 +212,15 @@ class UserDetails extends Component {
                                             </table>
                                             :
                                             <p className="UserDetails-none">
-                                            <span className="muted">Looks like the user has liked nothing. Some serious person.</span>
+                                                <span className="muted">Looks like the user has liked nothing. Some serious person.</span>
                                             </p>
                                             }
                                         </fieldset>
                                         {this.state.user.admin &&
                                             <fieldset>
                                                 <legend>Answers</legend>
-                                            { Object.keys(this.state.answeredQuestions).length > 0 ?
-                                            <table className="striped">
+                                                { Object.keys(this.state.answeredQuestions).length > 0 ?
+                                            <table >
                                                 <tbody>
                                                     <tr>
                                                         <th>#</th>
@@ -243,10 +240,10 @@ class UserDetails extends Component {
                                             </table>
                                             :
                                             <p className="UserDetails-none">
-                                            <span className="muted">Not answered any questions. Yet...</span>
+                                                <span className="muted">Not answered any questions. Yet...</span>
                                             </p>
                                             }
-                                            </fieldset>
+                                        </fieldset>
                                         }
                                     </div>
                                 </div>

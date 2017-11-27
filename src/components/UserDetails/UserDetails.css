@@ -7,6 +7,17 @@
     text-align: center;
     padding: 20px;
 }
+
+
+.UserDetails-user p span.tag{
+    background-color: #f5f5f5;
+}
+
+.UserDetails-user p span{
+    padding: 1px 9px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
 .UserDetails-stuff{
     padding: 20px;
 }
