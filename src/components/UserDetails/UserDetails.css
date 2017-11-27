@@ -11,8 +11,8 @@
     padding: 20px;
 }
 .UserDetails-image{
-    border-radius: 500px;
     padding-bottom: 20px;
+    width: 150px;
 }
 .UserDetails-user fieldset hr{
     width: 50%;

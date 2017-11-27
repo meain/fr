@@ -23,11 +23,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <BackToTop 
-          text={<Icon name="arrow-up"/>} 
+          <BackToTop
+          text={<Icon name="arrow-up"/>}
           shape="round"
-          background="white" 
-          color="black" 
+          background="white"
+          color="black"
           position={{ bottom: '10%', right: '50%'}}
           topDistance={300}
           hover={{background:"black", color:"white"}}
@@ -39,7 +39,7 @@ class App extends Component {
             <Route exact path="/" render={({history}) => (<ThreadList history={history}/>) } />
               <Route path="/newPost" render={ ({history}) => (<NewThread history={history} />) } />
           <Route path="/thread/:threadId" render={ () => (<ThreadDetails />) }/>
-          <Route path="/user/:userId" render={ () => (<UserDetails />) }/>
+          <Route path="/user/:userId" component={UserDetails}/>
 
           </div>
         </div>

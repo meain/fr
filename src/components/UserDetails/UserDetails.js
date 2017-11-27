@@ -16,13 +16,26 @@ class UserDetails extends Component {
 
         this.state = {
             loading: true,
-            key: window.location.pathname.split('/')[2],
+            key: this.props.match.params.userId,
             user: {},
         }
 
-        this.getLikes = this.getLikes.bind(this)
         this.getUserQuestions = this.getUserQuestions.bind(this)
         this.getLikedQuestions = this.getLikedQuestions.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            ...this.state,
+            loading: true,
+        })
+        firebase.database().ref('users/' + nextProps.match.params.userId).once('value', snap => {
+            this.setState({
+                ...this.state,
+                loading: false,
+                user: snap.val()
+            })
+        })
     }
 
     componentDidMount() {
@@ -35,24 +48,13 @@ class UserDetails extends Component {
         })
     }
 
-    getLikes() {
-        if (this.state.user.likes) {
-            let likes = []
-            for ( let like in this.state.user.likes){
-                if (this.state.user.likes[like]){
-                    likes.push(like)
-                }
-            }
-            return likes.length
-        }
-        else {
-            return 0
-        }
-    }
-
     getUserQuestions() {
         if (this.state.user.uid !== undefined) {
-            let threads = Object.keys(this.state.user.threads)
+            let userThreads = {}
+            if (this.state.user.threads){
+                userThreads = this.state.user.threads
+            }
+            let threads = Object.keys(userThreads)
             let threadData = this.props.threads.filter((thread) => threads.indexOf(thread.id) !== -1)
             return threadData
         }
@@ -84,9 +86,9 @@ class UserDetails extends Component {
     }
 
     render() {
-        let likes = this.getLikes()
         let userQuestions = this.getUserQuestions()
         let userLiked = this.getLikedQuestions()
+        let likes = userLiked.length
         return (
             <div>
                 {
