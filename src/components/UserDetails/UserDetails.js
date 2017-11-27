@@ -175,6 +175,7 @@ class UserDetails extends Component {
                                         {this.state.user.admin &&
                                             <fieldset>
                                                 <legend>Answers</legend>
+                                            <span className="muted">WIP, admin only feature.</span>
                                             </fieldset>
                                         }
                                     </div>

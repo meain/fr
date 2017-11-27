@@ -11,7 +11,7 @@ class User extends Component {
     super(props)
 
     this.state = {
-      user: null,
+      user: null, // not the actual content we need
       dropdownOpen: false,
     }
 
@@ -47,8 +47,11 @@ class User extends Component {
           userInfo.posts = d.posts
         if (d.registeredAt)
           userInfo.registeredAt = d.registeredAt
+        if (d.admin)
+            userInfo.admin = d.admin
       }
       firebase.database().ref('users/' + user.uid).set({ ...userInfo });
+        this.props.handle(userInfo)
     })
   }
 
@@ -57,10 +60,11 @@ class User extends Component {
       .then((result) => {
         const user = result.user;
         this.setState({
+          ...this.state,
           user
         });
         this.addUserToDB(user)
-        this.props.handle(this.state.user)
+        // this.props.handle(this.state.user)
       });
   }
 
@@ -68,18 +72,22 @@ class User extends Component {
     auth.signOut()
       .then(() => {
         this.setState({
+          ...this.state,
           user: null
         });
-        this.props.handle(this.state.user)
+        this.props.handle(null)
       });
   }
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user });
+        this.setState({
+          ...this.state,
+          user
+        });
         this.addUserToDB(user)
-        this.props.handle(this.state.user)
+        // this.props.handle(this.state.user)
       }
     });
   }
