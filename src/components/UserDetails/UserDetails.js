@@ -18,6 +18,7 @@ class UserDetails extends Component {
             loading: true,
             key: this.props.match.params.userId,
             user: {},
+            answeredQuestions: [],
         }
 
         this.getUserQuestions = this.getUserQuestions.bind(this)
@@ -33,8 +34,10 @@ class UserDetails extends Component {
             this.setState({
                 ...this.state,
                 loading: false,
-                user: snap.val()
+                user: snap.val(),
+                answeredQuestions:[]
             })
+            this.populateAnsweredQuestions()
         })
     }
 
@@ -43,9 +46,47 @@ class UserDetails extends Component {
             this.setState({
                 ...this.state,
                 loading: false,
-                user: snap.val()
+                user: snap.val(),
+                answeredQuestions:[]
             })
+            this.populateAnsweredQuestions()
         })
+    }
+
+    getThread(key){
+        for (let k in this.props.threads){
+            if (this.props.threads[k].id === key){
+                return this.props.threads[k]
+            }
+        }
+    }
+
+    populateAnsweredQuestions(){
+        let posts = []
+        for( let p in this.state.user.posts ){
+            if (this.state.user.posts[p]){
+                posts.push(p)
+            }
+        }
+        for(let post in posts){
+            firebase.database().ref('posts/' + posts[post] + '/thread').once('value', snap => {
+                let key = snap.val()
+                if( key !== undefined || key !== null ){
+                    let thread = this.getThread(key)
+                    if (thread !== undefined){
+                        let answeredQuestions = [...this.state.answeredQuestions]
+                        let index = answeredQuestions.indexOf(thread)
+                        if (index > -1)
+                            answeredQuestions.splice(index, 1)
+                        answeredQuestions.push(thread)
+                        this.setState({
+                            ...this.state,
+                            answeredQuestions,
+                        })
+                    }
+                }
+            })
+        }
     }
 
     getUserQuestions() {
@@ -175,7 +216,30 @@ class UserDetails extends Component {
                                         {this.state.user.admin &&
                                             <fieldset>
                                                 <legend>Answers</legend>
-                                            <span className="muted">WIP, admin only feature.</span>
+                                            { Object.keys(this.state.answeredQuestions).length > 0 ?
+                                            <table className="striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Question</th>
+                                                        <th>Likes</th>
+                                                    </tr>
+                                                    {this.state.answeredQuestions.map((thread, i) => {
+                                                        return (
+                                                            <tr key={thread.id}>
+                                                                <td>{i + 1}</td>
+                                                                <td><Link to={"/thread/" + thread.id}>{thread.data.title}</Link></td>
+                                                                <td>{this.getLikesForThread(thread.data)}</td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                            :
+                                            <p className="UserDetails-none">
+                                            <span className="muted">Not answered any questions. Yet...</span>
+                                            </p>
+                                            }
                                             </fieldset>
                                         }
                                     </div>
