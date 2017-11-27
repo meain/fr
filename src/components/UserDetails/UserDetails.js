@@ -149,6 +149,12 @@ class UserDetails extends Component {
                                         <fieldset>
                                             <legend>User</legend>
                                             <img className="UserDetails-image" src={this.state.user.displayImage} alt={this.state.user.displayName} />
+                                            { this.state.user.admin &&
+                                                <div>
+                                            <p><samp>ADMIN</samp></p>
+                                            <br />
+                                                </div>
+                                            }
                                             <p><span className="tag focus upper">Name </span>{' '}<span>{this.state.user.displayName}</span></p>
                                             <hr />
                                             <p><span className="tag error upper">Email </span>{' '}<span>{this.state.user.email}</span></p>
