@@ -4,7 +4,6 @@ import './ThreadDetails.css';
 
 import firebase from '../../firebase.js';
 import { updateThreads, userChanged } from '../../reducers.js'
-import { getThread } from '../../getters.js'
 
 import Editor from '../Editor/Editor';
 import Post from '../Post/Post'
@@ -14,7 +13,8 @@ class ThreadDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      key: window.location.pathname.split('/')[2],
+      key: props.match.params.threadId,
+      thread: this.getThread(props.match.params.threadId, props.threads),
       posts: [], // Loaded here on demand
       doneLoading: false
     }
@@ -23,6 +23,7 @@ class ThreadDetails extends Component {
     this.doneLoading = this.doneLoading.bind(this)
     this.scrollToTop()
   }
+
 
   scrollToTop(scrollDuration) {
     const scrollHeight = window.scrollY,
@@ -40,9 +41,8 @@ class ThreadDetails extends Component {
       }, 15);
   }
 
-
   componentDidMount() {
-    let posts = this.props.thread.posts
+    let posts = this.state.thread.posts
     if (posts) {
       let key = Object.keys(posts)[0]
       let postRef = firebase.database().ref("posts/" + key)
@@ -54,8 +54,25 @@ class ThreadDetails extends Component {
     }
   }
 
+  getThread(key, threads){
+    let data = {}
+    for (var i = 0; i <  threads.length; i++){
+      if (threads[i].id === key){
+        data = threads[i].data
+        break
+      }
+    }
+    return data
+  }
+
   componentWillReceiveProps(props) {
-    let posts = props.thread.posts
+    // let posts = props.thread.posts
+    this.setState({
+      ...this.state,
+      key: props.match.params.threadId,
+      thread: this.getThread(props.match.params.threadId, props.threads),
+    })
+    let posts = this.getThread(props.match.params.threadId, props.threads).posts
     if (posts) {
       let key = Object.keys(posts)[0]
       let postRef = firebase.database().ref("posts/" + key)
@@ -81,6 +98,7 @@ class ThreadDetails extends Component {
           content: data.content,
           createdAt: Date.now(),
           user: this.props.user.uid,
+          thread: this.state.key,
         };
       const key = firebase.database().ref('posts').push(post).key;
       // Add theard data to user
@@ -91,20 +109,20 @@ class ThreadDetails extends Component {
 
   render() {
     // let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.state.doneLoading
-    let showEditor = this.props.user !== null && this.state.posts.length === 0
+    let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.props.user.admin
     return (
       <div className="ThreadDetails">
         <Thread
           key={this.state.key}
           user={this.props.user}
           postKey={this.state.key}
-          data={this.props.thread}
+          data={this.state.thread}
           hasHeading={true}
           dockBottom={true}
           doneLoading={this.doneLoading}
           handleClick={(e) => { }}
         />
-        { !showEditor &&
+        { !showEditor && this.state.posts && this.state.posts.length > 0 &&
         <fieldset>
           <legend>Answer</legend>
           {this.state.posts.map((post, i) => <Post key={i} data={post} />)}
@@ -125,7 +143,7 @@ class ThreadDetails extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    thread: getThread(window.location.pathname.split('/')[2], state),
+    threads: state.threads
   }
 }
 

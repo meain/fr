@@ -38,7 +38,7 @@ class App extends Component {
 
             <Route exact path="/" render={({history}) => (<ThreadList history={history}/>) } />
               <Route path="/newPost" render={ ({history}) => (<NewThread history={history} />) } />
-          <Route path="/thread/:threadId" render={ () => (<ThreadDetails />) }/>
+          <Route path="/thread/:threadId" component={ThreadDetails}/>
           <Route path="/user/:userId" component={UserDetails}/>
 
           </div>
