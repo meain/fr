@@ -111,7 +111,7 @@ class ThreadFooter extends Component {
         </div>
         <UserImage />
         <p className="ThreadFooter-like" onClick={this.handleLike}>
-          <Icon name="thumbs-o-up" className={userLiked ? 'color-red' : ''} /> {this.numOfLikes()}
+          <Icon name="thumbs-up" className={userLiked ? 'color-blue' : ''} /> {this.numOfLikes()}
         </p>
       </div>
     )
