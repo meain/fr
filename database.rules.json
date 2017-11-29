@@ -4,7 +4,7 @@
       "$uid": {
         ".read": true,
         ".write": "auth.uid == $uid",
-        "admin":{
+        "admin": {
           ".validate": "data.val() == newData.val() || (newData.val() == false && !data.exists())"
         },
         "registeredAt": {
@@ -18,35 +18,43 @@
     "threads": {
       ".read": true,
       ".write": "auth != null",
-      "$thread":{
-        "user":{
-          ".validate": "newData.val() == auth.uid && root.child('users').child(newData.val()).exists()"
+      "$thread": {
+        "user": {
+          ".validate":
+            "newData.val() == auth.uid && root.child('users').child(newData.val()).exists()"
         },
-        "title":{
+        "title": {
           ".validate": "newData.val().length > 0"
         },
-        "content":{
+        "content": {
           ".validate": "newData.val().length > 0"
         },
         "createdAt": {
           ".validate": "newData.isNumber()"
         },
         "posts": {
-          ".validate": "newData.val() == data.val() || root.child('users').child(auth.uid).child('admin').val() == true"
+          ".validate":
+            "newData.val() == data.val() || root.child('users').child(auth.uid).child('admin').val() == true"
+        },
+        "likes": {
+          "$luid": {
+            ".validate": "newData.val() == data.val() || $luid == auth.uid"
+          }
         }
       }
     },
     "posts": {
       ".read": true,
       ".write": "auth != null",
-      "$post":{
-        "user":{
-          ".validate": "newData.val() == auth.uid && root.child('users').child(newData.val()).child('admin').val() == true"
+      "$post": {
+        "user": {
+          ".validate":
+            "newData.val() == auth.uid && root.child('users').child(newData.val()).child('admin').val() == true"
         },
-        "content":{
+        "content": {
           ".validate": "newData.val().length > 0"
         },
-        "thread":{
+        "thread": {
           ".validate": "root.child('threads').child(newData.val()).exists()"
         },
         "createdAt": {
