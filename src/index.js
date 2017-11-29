@@ -12,16 +12,16 @@ import store from './redux.js'
 
 let threadsRef = firebase.database().ref('threads')
 threadsRef.on('value', snapshot => {
-    store.dispatch({
+  store.dispatch({
 	    type: 'FIREBASE_THREAD_CHANGE',
 	    payload: snapshot.val(),
-    })
+  })
 })
 // let postsRef = firebase.database().ref('posts')
 
 ReactDOM.render(
-    <Provider store={store}>
+  <Provider store={store}>
 	    <App />
-    </Provider>,
-    document.getElementById('root'))
+  </Provider>,
+  document.getElementById('root'))
 registerServiceWorker()
