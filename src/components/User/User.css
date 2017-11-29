@@ -23,6 +23,7 @@
     display: inline-block;
     cursor: pointer;
     float: right;
+    border-radius: 50px;
 }
 
 .User-dropdown {
