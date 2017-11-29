@@ -38,6 +38,19 @@
   cursor: pointer;
 }
 
+.ThreadFooter-user-image {
+  width: 50px;
+  height: auto;
+  border-radius: 50px;
+  float: right;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.ThreadFooter-user-image:hover {
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.22);
+}
+
 .ThreadFooter-elements {
   height: 50px;
   display: inline-block;
@@ -55,7 +68,31 @@
   float: right;
   margin-right: 70px;
   padding: 11px;
+  transition: all 0.5s;
 }
+
+.ThreadFooter-like span:hover {
+  animation: pound 0.3s;
+}
+
+@keyframes pound {
+  from {
+    transform: none;
+  }
+  30% {
+    transform: scale(1.4);
+  }
+  50% {
+    transform: none;
+  }
+  70% {
+    transform: scale(1.4);
+  }
+  to {
+    transform: none;
+  }
+}
+
 .color-red {
   color: red;
 }
