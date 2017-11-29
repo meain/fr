@@ -31,15 +31,16 @@ class Thread extends Component {
   render() {
     let title = this.props.data.title
     let content = this.props.data.content
+    let shadow = this.props.raiseOnHover ? 'raise' : ''
     if (this.props.data.user === undefined) {
-      return (<Loading 
+      return (<Loading
         initialMessage="Loading question, Just a sec."
       />)
     }
     // this.doneLoading()
     let legend = 'Question'
     return (
-      <div className="Thread" onClick={this.props.handleClick}>
+      <div className={'Thread ' + shadow} onClick={this.props.handleClick}>
         <fieldset>
           <legend>{legend}</legend>
           <h2 className="Thread-title">{title}</h2>

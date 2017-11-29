@@ -1,16 +1,17 @@
 .Thread {
   margin-top: 5px;
+  cursor: pointer;
 }
 
 .Thread-title {
-  font-family: "Josefin Sans", Arial, Helvetica, sans-serif !important;
+  font-family: 'Josefin Sans', Arial, Helvetica, sans-serif !important;
   font-size: 40px;
 }
 
-.Thread-seperator{
-	height: 6px;
-	background: url(./hr.png) repeat-x 0 0;
-    border: 0;
+.Thread-seperator {
+  height: 6px;
+  background: url(./hr.png) repeat-x 0 0;
+  border: 0;
 }
 
 .Thread-content {
@@ -24,4 +25,12 @@
 
 .Thread-content-markdown p img {
   max-width: 100%;
+}
+
+.raise {
+  transition: box-shadow 0.5s;
+}
+
+.raise:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.22);
 }

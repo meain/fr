@@ -59,7 +59,7 @@ class ThreadList extends Component {
       <div className="ThreadList">
         {
           this.state.loading ?
-            <Loading 
+            <Loading
               initialMessage="Loading thread list. Just hang on."
             />
             :
@@ -108,6 +108,7 @@ class ThreadList extends Component {
                   postKey={thread.id}
                   data={thread.data}
                   bordered={true}
+                  raiseOnHover={true}
                   handleClick={(e) => this.handleClick(e, thread.id)}
                 />
               )}
