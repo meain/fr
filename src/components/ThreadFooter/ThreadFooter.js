@@ -20,14 +20,16 @@ class ThreadFooter extends Component {
     }
   }
 
-
   componentDidMount() {
     let uid = this.props.data.user
-    firebase.database().ref('users/' + uid).once('value', snap => {
-      this.setState({
-        user: snap.val()
+    firebase
+      .database()
+      .ref('users/' + uid)
+      .once('value', snap => {
+        this.setState({
+          user: snap.val()
+        })
       })
-    })
   }
 
   numOfLikes() {
@@ -39,8 +41,7 @@ class ThreadFooter extends Component {
         }
       }
       return likes
-    }
-    else {
+    } else {
       return 0
     }
   }
@@ -49,12 +50,13 @@ class ThreadFooter extends Component {
     let key = this.props.postKey
     ev.stopPropagation()
     if (this.props.user) {
-      let threadLikeRef = firebase.database().ref('threads/' + key + '/likes/' + this.props.user.uid)
+      let threadLikeRef = firebase
+        .database()
+        .ref('threads/' + key + '/likes/' + this.props.user.uid)
       threadLikeRef.once('value', snap => {
         let sval = snap.val()
         let statusVal = true
-        if (sval != null)
-          statusVal = !sval
+        if (sval != null) statusVal = !sval
         snap.ref.set(statusVal)
         let userLikeRef = firebase.database().ref('users/' + this.props.user.uid + '/likes/' + key)
         userLikeRef.set(statusVal)
@@ -62,52 +64,53 @@ class ThreadFooter extends Component {
     }
   }
 
-  getUser(){
-    if (this.state.user){
+  getUser() {
+    if (this.state.user) {
       return this.state.user
-    }
-    else{
+    } else {
       return {
         displayName: '<unknown>',
-        displayImage: '<unknown>',
+        displayImage: 'no image'
       }
     }
   }
 
-  userIconClick(ev, history){
+  userIconClick(ev, history) {
     ev.preventDefault()
     ev.stopPropagation()
-    if (this.state.user)
-      history.push('/user/' + this.state.user.uid)
+    if (this.state.user) history.push('/user/' + this.state.user.uid)
   }
 
   render() {
     let user = this.getUser()
-    let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
+    let userLiked =
+      this.props.data.likes &&
+      this.props.user &&
+      this.props.data.likes[this.props.user.uid] === true
     const UserImage = withRouter(({ history }) => (
-      <img className="ThreadFooter-user-image"
+      <img
+        className="ThreadFooter-user-image"
         src={user.displayImage}
-        onClick={(ev) => {this.userIconClick(ev, history)}}
-        alt={user.displayName} />
+        onClick={ev => {
+          this.userIconClick(ev, history)
+        }}
+        alt={user.displayName}
+      />
     ))
     return (
       <div className={'ThreadFooter' + (this.props.dockBottom ? '-docked' : '')}>
         <div className="ThreadFooter-elements">
           <p>
-            <span className="strong monospace">
-              {user.displayName}
-            </span>
+            <span className="strong monospace">{user.displayName}</span>
           </p>
           <p>
-            <span className="muted monospace">
-              {moment(this.props.data.createdAt).fromNow()}
-            </span>
+            <span className="muted monospace">{moment(this.props.data.createdAt).fromNow()}</span>
           </p>
         </div>
         <UserImage />
         <p className="ThreadFooter-like" onClick={this.handleLike}>
-          <Icon name="thumbs-o-up" className={userLiked ? 'color-red' : ''} />
-          {' '}{this.numOfLikes()}</p>
+          <Icon name="thumbs-o-up" className={userLiked ? 'color-red' : ''} /> {this.numOfLikes()}
+        </p>
       </div>
     )
   }
