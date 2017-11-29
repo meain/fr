@@ -9,6 +9,7 @@ import firebase from '../../firebase.js'
 import { updateThreads, userChanged } from '../../reducers.js'
 
 import Loading from '../Loading/Loading'
+import MiniThreadList from '../MiniThreadList/MiniThreadList'
 
 class UserDetails extends Component {
     constructor(props) {
@@ -116,16 +117,6 @@ class UserDetails extends Component {
         return []
     }
 
-    getLikesForThread(thread){
-        let likes = []
-        for ( let like in thread.likes){
-            if (thread.likes[like]){
-                likes.push(like)
-            }
-        }
-        return likes.length
-    }
-
     render() {
         let userQuestions = this.getUserQuestions()
         let userLiked = this.getLikedQuestions()
@@ -162,88 +153,22 @@ class UserDetails extends Component {
                                         </fieldset>
                                     </div>
                                     <div className="col UserDetails-stuff">
-                                        <fieldset>
-                                            <legend>Questions</legend>
-                                            { Object.keys(userQuestions).length > 0 ?
-                                                <table >
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Question</th>
-                                                            <th>Likes</th>
-                                                        </tr>
-                                                        {userQuestions.map((thread, i) => {
-                                                            return (
-                                                                <tr key={thread.id}>
-                                                                    <td>{i + 1}</td>
-                                                                    <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
-                                                                    <td>{this.getLikesForThread(thread.data)}</td>
-                                                                </tr>
-                                                            )
-                                                        })}
-                                                    </tbody>
-                                                </table>
-                                                :
-                                                <p className="UserDetails-none">
-                                                    <span className="muted">Well, the user has not asked any questions so far.</span>
-                                                </p>
-                                            }
-                                        </fieldset>
-                                        <fieldset>
-                                            <legend>Likes</legend>
-                                            { Object.keys(userLiked).length > 0 ?
-                                                <table >
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Question</th>
-                                                            <th>Likes</th>
-                                                        </tr>
-                                                        {userLiked.map((thread, i) => {
-                                                            return (
-                                                                <tr key={thread.id}>
-                                                                    <td>{i + 1}</td>
-                                                                    <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
-                                                                    <td>{this.getLikesForThread(thread.data)}</td>
-                                                                </tr>
-                                                            )
-                                                        })}
-                                                    </tbody>
-                                                </table>
-                                                :
-                                                <p className="UserDetails-none">
-                                                    <span className="muted">Looks like the user has liked nothing. Some serious person.</span>
-                                                </p>
-                                            }
-                                        </fieldset>
+                                        <MiniThreadList
+                                            threads={userQuestions}
+                                            title='Questions'
+                                            noneMessage='Well, the user has not asked any questions so far.'
+                                        />
+                                        <MiniThreadList
+                                            threads={userLiked}
+                                            title='Likes'
+                                            noneMessage='Looks like the user has liked nothing. Some serious person.'
+                                        />
                                         {this.state.user.admin &&
-                                            <fieldset>
-                                                <legend>Answers</legend>
-                                                { Object.keys(this.state.answeredQuestions).length > 0 ?
-                                                    <table >
-                                                        <tbody>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Question</th>
-                                                                <th>Likes</th>
-                                                            </tr>
-                                                            {this.state.answeredQuestions.map((thread, i) => {
-                                                                return (
-                                                                    <tr key={thread.id}>
-                                                                        <td>{i + 1}</td>
-                                                                        <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
-                                                                        <td>{this.getLikesForThread(thread.data)}</td>
-                                                                    </tr>
-                                                                )
-                                                            })}
-                                                        </tbody>
-                                                    </table>
-                                                    :
-                                                    <p className="UserDetails-none">
-                                                        <span className="muted">Not answered any questions. Yet...</span>
-                                                    </p>
-                                                }
-                                            </fieldset>
+                                        <MiniThreadList
+                                            threads={this.state.answeredQuestions}
+                                            title='Answered'
+                                            noneMessage='Not answered any questions. Yet...'
+                                        />
                                         }
                                     </div>
                                 </div>
