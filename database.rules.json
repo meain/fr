@@ -1,6 +1,40 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "auth != null"
+    "users": {
+      "$uid": {
+        ".read": true,
+        ".write": "auth.uid == $uid",
+        "admin":{
+          ".validate": "data.val() == newData.val()"
+        }
+      }
+    },
+    "threads": {
+      ".read": true,
+      ".write": "auth != null",
+      "$thread":{
+        "user":{
+          ".validate": "newData.val() == auth.uid"
+        },
+        "title":{
+          ".validate": "newData.val().length > 0"
+        },
+        "content":{
+          ".validate": "newData.val().length > 0"
+        }
+      }
+    },
+    "posts": {
+      ".read": true,
+      ".write": "auth != null",
+      "$post":{
+        "user":{
+          ".validate": "newData.val() == auth.uid && root.child('users').child(newData.val()).child('admin').val() == true"
+        },
+        "content":{
+          ".validate": "newData.val().length > 0"
+        }
+      }
+    }
   }
 }
