@@ -21,9 +21,15 @@
 .PageHeader-hero {
   cursor: pointer;
   font-size: 40px !important;
-  font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
-  /* background-color: black;
-  color: white; */
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  border: 5px solid #fff;
+  transition: all 0.5s;
+  padding: 0 8px;
+}
+.PageHeader-hero:hover {
+  border: 5px solid #222;
+  background-color: #222;
+  color: #fff;
 }
 
 @media only screen and (max-width: 500px) {
