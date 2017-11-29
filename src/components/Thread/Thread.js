@@ -6,12 +6,11 @@ import ThreadFooter from '../ThreadFooter/ThreadFooter'
 import Loading from '../Loading/Loading'
 
 class Thread extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
-      messageBubbled: false,
+      messageBubbled: false
     }
 
     // this.doneLoading = this.doneLoading.bind(this)
@@ -32,10 +31,10 @@ class Thread extends Component {
     let title = this.props.data.title
     let content = this.props.data.content
     let shadow = this.props.raiseOnHover ? 'raise' : ''
+    let maxHeight = this.props.maxHeight ? this.props.maxHeight : 'none'
+    let overflow = this.props.maxHeight ? 'auto' : 'none'
     if (this.props.data.user === undefined) {
-      return (<Loading
-        initialMessage="Loading question, Just a sec."
-      />)
+      return <Loading initialMessage="Loading question, Just a sec." />
     }
     // this.doneLoading()
     let legend = 'Question'
@@ -44,15 +43,24 @@ class Thread extends Component {
         <fieldset>
           <legend>{legend}</legend>
           <h2 className="Thread-title">{title}</h2>
-          { this.props.data.posts && <mark>Answered</mark>}
+          {this.props.data.posts && <mark>Answered</mark>}
           <hr className="Thread-seperator" />
-          <Markdown className={'Thread-content-markdown ' + (this.props.zoomout ? 'zoomout' : '' )} source={content} />
-          <ThreadFooter dockBottom={this.props.dockBottom} user={this.props.user} postKey={this.props.postKey} data={this.props.data} />
+          <div style={{ maxHeight: maxHeight, overflowY: overflow }}>
+            <Markdown
+              className={'Thread-content-markdown ' + (this.props.zoomout ? 'zoomout' : '')}
+              source={content}
+            />
+          </div>
+          <ThreadFooter
+            dockBottom={this.props.dockBottom}
+            user={this.props.user}
+            postKey={this.props.postKey}
+            data={this.props.data}
+          />
         </fieldset>
       </div>
     )
   }
-
 }
 
 export default Thread

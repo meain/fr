@@ -109,6 +109,7 @@ class ThreadList extends Component {
                   data={thread.data}
                   bordered={true}
                   raiseOnHover={true}
+                  maxHeight='500px'
                   handleClick={(e) => this.handleClick(e, thread.id)}
                 />
               )}
