@@ -165,85 +165,85 @@ class UserDetails extends Component {
                                         <fieldset>
                                             <legend>Questions</legend>
                                             { Object.keys(userQuestions).length > 0 ?
-                                            <table >
-                                                <tbody>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Question</th>
-                                                        <th>Likes</th>
-                                                    </tr>
-                                                    {userQuestions.map((thread, i) => {
-                                                        return (
-                                                            <tr key={thread.id}>
-                                                                <td>{i + 1}</td>
-                                                                <td><Link to={"/thread/" + thread.id}>{thread.data.title}</Link></td>
-                                                                <td>{this.getLikesForThread(thread.data)}</td>
-                                                            </tr>
-                                                        )
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                            :
-                                            <p className="UserDetails-none">
-                                                <span className="muted">Well, the user has not asked any questions so far.</span>
-                                            </p>
+                                                <table >
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Question</th>
+                                                            <th>Likes</th>
+                                                        </tr>
+                                                        {userQuestions.map((thread, i) => {
+                                                            return (
+                                                                <tr key={thread.id}>
+                                                                    <td>{i + 1}</td>
+                                                                    <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
+                                                                    <td>{this.getLikesForThread(thread.data)}</td>
+                                                                </tr>
+                                                            )
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                                :
+                                                <p className="UserDetails-none">
+                                                    <span className="muted">Well, the user has not asked any questions so far.</span>
+                                                </p>
                                             }
                                         </fieldset>
                                         <fieldset>
                                             <legend>Likes</legend>
                                             { Object.keys(userLiked).length > 0 ?
-                                            <table >
-                                                <tbody>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Question</th>
-                                                        <th>Likes</th>
-                                                    </tr>
-                                                    {userLiked.map((thread, i) => {
-                                                        return (
-                                                            <tr key={thread.id}>
-                                                                <td>{i + 1}</td>
-                                                                <td><Link to={"/thread/" + thread.id}>{thread.data.title}</Link></td>
-                                                                <td>{this.getLikesForThread(thread.data)}</td>
-                                                            </tr>
-                                                        )
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                            :
-                                            <p className="UserDetails-none">
-                                                <span className="muted">Looks like the user has liked nothing. Some serious person.</span>
-                                            </p>
+                                                <table >
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Question</th>
+                                                            <th>Likes</th>
+                                                        </tr>
+                                                        {userLiked.map((thread, i) => {
+                                                            return (
+                                                                <tr key={thread.id}>
+                                                                    <td>{i + 1}</td>
+                                                                    <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
+                                                                    <td>{this.getLikesForThread(thread.data)}</td>
+                                                                </tr>
+                                                            )
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                                :
+                                                <p className="UserDetails-none">
+                                                    <span className="muted">Looks like the user has liked nothing. Some serious person.</span>
+                                                </p>
                                             }
                                         </fieldset>
                                         {this.state.user.admin &&
                                             <fieldset>
                                                 <legend>Answers</legend>
                                                 { Object.keys(this.state.answeredQuestions).length > 0 ?
-                                            <table >
-                                                <tbody>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Question</th>
-                                                        <th>Likes</th>
-                                                    </tr>
-                                                    {this.state.answeredQuestions.map((thread, i) => {
-                                                        return (
-                                                            <tr key={thread.id}>
-                                                                <td>{i + 1}</td>
-                                                                <td><Link to={"/thread/" + thread.id}>{thread.data.title}</Link></td>
-                                                                <td>{this.getLikesForThread(thread.data)}</td>
+                                                    <table >
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Question</th>
+                                                                <th>Likes</th>
                                                             </tr>
-                                                        )
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                            :
-                                            <p className="UserDetails-none">
-                                                <span className="muted">Not answered any questions. Yet...</span>
-                                            </p>
-                                            }
-                                        </fieldset>
+                                                            {this.state.answeredQuestions.map((thread, i) => {
+                                                                return (
+                                                                    <tr key={thread.id}>
+                                                                        <td>{i + 1}</td>
+                                                                        <td><Link to={'/thread/' + thread.id}>{thread.data.title}</Link></td>
+                                                                        <td>{this.getLikesForThread(thread.data)}</td>
+                                                                    </tr>
+                                                                )
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+                                                    :
+                                                    <p className="UserDetails-none">
+                                                        <span className="muted">Not answered any questions. Yet...</span>
+                                                    </p>
+                                                }
+                                            </fieldset>
                                         }
                                     </div>
                                 </div>
