@@ -13,6 +13,8 @@ class ThreadFooter extends Component {
 
         this.numOfLikes = this.numOfLikes.bind(this)
         this.handleLike = this.handleLike.bind(this)
+        this.getUser = this.getUser.bind(this)
+        this.userIconClick = this.userIconClick.bind(this)
         this.state = {
             user: {}
         }
@@ -60,20 +62,40 @@ class ThreadFooter extends Component {
         }
     }
 
+    getUser(){
+        if (this.state.user){
+            return this.state.user
+        }
+        else{
+            return {
+                displayName: '<unknown>',
+                displayImage: '<unknown>',
+            }
+        }
+    }
+
+    userIconClick(ev, history){
+        ev.preventDefault()
+        ev.stopPropagation()
+        if (this.state.user)
+            history.push('/user/' + this.state.user.uid)
+    }
+
     render() {
+        let user = this.getUser()
         let userLiked = this.props.data.likes && this.props.user && this.props.data.likes[this.props.user.uid] === true
         const UserImage = withRouter(({ history }) => (
             <img className="ThreadFooter-user-image"
-                src={this.state.user.displayImage}
-                onClick={(ev) => {ev.preventDefault(); ev.stopPropagation(); history.push('/user/' + this.state.user.uid)}}
-                alt={this.state.user.displayName} />
+                src={user.displayImage}
+                onClick={(ev) => {this.userIconClick(ev, history)}}
+                alt={user.displayName} />
         ))
         return (
             <div className={'ThreadFooter' + (this.props.dockBottom ? '-docked' : '')}>
                 <div className="ThreadFooter-elements">
                     <p>
                         <span className="strong monospace">
-                            {this.state.user.displayName}
+                            {user.displayName}
                         </span>
                     </p>
                     <p>

@@ -5,7 +5,13 @@
         ".read": true,
         ".write": "auth.uid == $uid",
         "admin":{
-          ".validate": "data.val() == newData.val()"
+          ".validate": "data.val() == newData.val() || (newData.val() == false && !data.exists())"
+        },
+        "registeredAt": {
+          ".validate": "newData.isNumber() && (data.val() == newData.val() || !data.exists())"
+        },
+        "lastLogin": {
+          ".validate": "newData.isNumber()"
         }
       }
     },
@@ -14,13 +20,19 @@
       ".write": "auth != null",
       "$thread":{
         "user":{
-          ".validate": "newData.val() == auth.uid"
+          ".validate": "newData.val() == auth.uid && root.child('users').child(newData.val()).exists()"
         },
         "title":{
           ".validate": "newData.val().length > 0"
         },
         "content":{
           ".validate": "newData.val().length > 0"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "posts": {
+          ".validate": "newData.val() == data.val() || root.child('users').child(auth.uid).child('admin').val() == true"
         }
       }
     },
@@ -33,6 +45,12 @@
         },
         "content":{
           ".validate": "newData.val().length > 0"
+        },
+        "thread":{
+          ".validate": "root.child('threads').child(newData.val()).exists()"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
         }
       }
     }
