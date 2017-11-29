@@ -9,7 +9,7 @@ class Loading extends Component {
         super(props)
 
         this.state = {
-            loadingMessage: props.initialMessage || "On my way!",
+            loadingMessage: props.initialMessage || 'On my way!',
             loadingMessages: loadingMessages
         }
     }
@@ -21,7 +21,7 @@ class Loading extends Component {
                 ...this.state,
                 loadingMessage: messages[Math.floor(Math.random() * messages.length)]
             })
-        }, 5000);
+        }, 5000)
     }
 
     render() {
@@ -29,10 +29,10 @@ class Loading extends Component {
             <div className="Loading">
                 <Icon spin name="adjust" className="Loading-spinner" />
                 <p>
-                <span className="muted monospace">LOADING</span>
+                    <span className="muted monospace">LOADING</span>
                 </p>
                 <p>
-                <span className="muted monospace">{this.state.loadingMessage}</span>
+                    <span className="muted monospace">{this.state.loadingMessage}</span>
                 </p>
             </div>
         )
