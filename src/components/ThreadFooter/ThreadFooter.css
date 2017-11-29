@@ -1,59 +1,64 @@
 .ThreadFooter {
-    margin-top: 10px;
-    background-color: rgba(255, 255, 255, 0.336);
-    font-family: monaco, meleno, monospace;
-    float: left;
-    width: 100%;
-    height: 50px;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.336);
+  font-family: monaco, meleno, monospace;
+  float: left;
+  width: 100%;
+  height: 50px;
 }
 .ThreadFooter-docked {
-    margin-top: 10px;
-    background-color: rgba(255, 255, 255, 1);
-    font-family: monaco, meleno, monospace;
-    float: left;
-    width: 100vw;
-    height: 50px;
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-    z-index: 100;
-    /* padding-left: 20px;
-    padding-right: 20px; */
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: monaco, meleno, monospace;
+  float: left;
+  width: 100vw;
+  height: 50px;
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  z-index: 100;
+  padding: 0 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.ThreadFooter-docked .ThreadFooter-user-image {
+  width: 50px;
+  height: auto;
+  float: right;
+  cursor: pointer;
 }
 
-.ThreadFooter-user-image {
-    width: 50px;
-    height: auto;
-    border-radius: 50px 0 0 50px;
-    float: right;
-    cursor: pointer;
+.ThreadFooter .ThreadFooter-user-image {
+  width: 50px;
+  height: auto;
+  border-radius: 50px 0 0 50px;
+  float: right;
+  cursor: pointer;
 }
 
 .ThreadFooter-elements {
-    height: 50px;
-    display: inline-block;
-    text-align: left;
-    padding: 15px;
-    padding-left: 20px;
+  height: 50px;
+  display: inline-block;
+  text-align: left;
+  padding: 15px;
+  padding-left: 20px;
 }
-.ThreadFooter-elements p{
-    margin: -10px;
+.ThreadFooter-elements p {
+  margin: -10px;
 }
 
 .ThreadFooter-like {
-    user-select: none;
-    font-size: 25px;
-    float: right;
-    margin-right: 70px;
-    padding: 11px;
+  user-select: none;
+  font-size: 25px;
+  float: right;
+  margin-right: 70px;
+  padding: 11px;
 }
-.color-red{
-    color: red;
+.color-red {
+  color: red;
 }
 
 @media only screen and (max-width: 500px) {
-    .ThreadFooter-like {
+  .ThreadFooter-like {
     margin-right: 10px;
-    }
+  }
 }

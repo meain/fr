@@ -1,7 +1,7 @@
 .PageHeader {
   color: #222;
   width: 100vw;
-  padding: 5px;
+  padding: 5px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   height: 60px;
   position: fixed;
@@ -24,4 +24,10 @@
   font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
   /* background-color: black;
   color: white; */
+}
+
+@media only screen and (max-width: 500px) {
+  .PageHeader {
+    padding: 5px;
+  }
 }
