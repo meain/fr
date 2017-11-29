@@ -5,6 +5,8 @@ import Icon from 'react-fa'
 
 import './ThreadFooter.css'
 
+import userPlaceholder from './user.png'
+
 import firebase from '../../firebase.js'
 
 class ThreadFooter extends Component {
@@ -70,7 +72,7 @@ class ThreadFooter extends Component {
     } else {
       return {
         displayName: '<unknown>',
-        displayImage: 'no image'
+        displayImage: userPlaceholder
       }
     }
   }
@@ -94,7 +96,7 @@ class ThreadFooter extends Component {
         onClick={ev => {
           this.userIconClick(ev, history)
         }}
-        alt={user.displayName}
+        alt={user.displayImage}
       />
     ))
     return (
