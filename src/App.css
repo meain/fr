@@ -1,5 +1,5 @@
 .App {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   overflow: hidden;
 }
 
@@ -18,7 +18,7 @@ h5,
 h6,
 p,
 button {
-  font-family: "Lato", Arial, Helvetica, sans-serif !important;
+  font-family: 'Lato', Arial, Helvetica, sans-serif !important;
 }
 
 @media only screen and (max-width: 700px) {
@@ -28,7 +28,7 @@ button {
   }
 }
 
-.page-title{
+.page-title {
   text-decoration: skyblue underline double;
   text-decoration-style: wavy;
   text-align: center;
@@ -55,6 +55,10 @@ pre {
   }
 }
 
-.hljs{
+.hljs {
   background-color: unset !important;
+}
+
+img {
+  overflow: hidden;
 }

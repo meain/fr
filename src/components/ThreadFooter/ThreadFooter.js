@@ -96,7 +96,7 @@ class ThreadFooter extends Component {
         onClick={ev => {
           this.userIconClick(ev, history)
         }}
-        alt={user.displayImage}
+        alt={user.displayName}
       />
     ))
     return (

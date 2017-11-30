@@ -24,7 +24,7 @@
 
 .ThreadFooter-docked .ThreadFooter-user-image {
   width: 50px;
-  height: auto;
+  height: 50px;
   float: right;
   cursor: pointer;
   border-radius: 50px;
@@ -32,7 +32,7 @@
 
 .ThreadFooter .ThreadFooter-user-image {
   width: 50px;
-  height: auto;
+  height: 50px;
   border-radius: 50px;
   float: right;
   cursor: pointer;

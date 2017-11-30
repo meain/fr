@@ -26,7 +26,6 @@ class SearchWidget extends Component {
     objects = objects.filter(object =>
       fuzzysearch(query.toLowerCase(), object.data.title.toLowerCase())
     )
-    console.log('query: ', query, query.length)
 
     if (query.length > 0) {
       this.setState({
@@ -110,7 +109,6 @@ class SearchWidget extends Component {
     let objects = this.state.displayObjects
     let listHide = this.state.searching ? 'unhide' : ''
     let SearchButton = this.getSearchButton()
-    console.table(objects)
     return (
       <div className="SearchWidget">
         <input
