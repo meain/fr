@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BackToTop from 'react-back-top'
 import Icon from 'react-fa'
+
+import '../node_modules/highlight.js/styles/default.css'
+
 import './App.css'
 
 import { updateThreads, userChanged } from './reducers.js'

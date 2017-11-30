@@ -54,3 +54,7 @@ pre {
     transform: none;
   }
 }
+
+.hljs{
+  background-color: unset !important;
+}

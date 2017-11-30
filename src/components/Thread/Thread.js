@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Markdown from 'react-markdown'
+
 import './Thread.css'
 
 import ThreadFooter from '../ThreadFooter/ThreadFooter'
 import Loading from '../Loading/Loading'
+import CodeBlock from '../CodeBlock/CodeBlock'
 
 class Thread extends Component {
   constructor(props) {
@@ -49,6 +51,10 @@ class Thread extends Component {
             <Markdown
               className={'Thread-content-markdown ' + (this.props.zoomout ? 'zoomout' : '')}
               source={content}
+              escapeHtml={true}
+              renderers={{
+                code: CodeBlock
+              }}
             />
           </div>
           <ThreadFooter

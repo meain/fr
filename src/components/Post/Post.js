@@ -5,32 +5,44 @@ import Markdown from 'react-markdown'
 import './Post.css'
 
 import firebase from '../../firebase.js'
-
+import CodeBlock from '../CodeBlock/CodeBlock'
 
 class Post extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      user: {} 
+      user: {}
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let uid = this.props.data.user
-    firebase.database().ref('users/' + uid).once('value', snap => {
-      this.setState({
-        user: snap.val()
+    firebase
+      .database()
+      .ref('users/' + uid)
+      .once('value', snap => {
+        this.setState({
+          user: snap.val()
+        })
       })
-    })
   }
-  
+
   render() {
     return (
       <div>
-        <samp> Answered by {this.state.user.displayName} {' '} {moment(this.props.data.createdAt).fromNow()}</samp>
+        <samp>
+          {' '}
+          Answered by {this.state.user.displayName} {moment(this.props.data.createdAt).fromNow()}
+        </samp>
         <br />
-        <Markdown className="Post-content-markdown" source={this.props.data.content} />
+        <Markdown
+          className="Post-content-markdown"
+          source={this.props.data.content}
+          renderers={{
+            code: CodeBlock
+          }}
+        />
       </div>
     )
   }
