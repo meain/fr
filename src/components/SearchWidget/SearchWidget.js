@@ -17,6 +17,7 @@ class SearchWidget extends Component {
     }
 
     this.filterObjects = this.filterObjects.bind(this)
+    this.objectDisplay = this.objectDisplay.bind(this)
   }
 
   filterObjects() {
@@ -56,6 +57,11 @@ class SearchWidget extends Component {
         <div
           className={'SearchWidget-searchItem ' + alternate}
           onClick={() => {
+            this.searchInput.value = ''
+            this.setState({
+              ...this.state,
+              searching: false
+            })
             history.push('/thread/' + object.id)
           }}
         >
