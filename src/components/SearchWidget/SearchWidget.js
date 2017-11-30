@@ -76,12 +76,22 @@ class SearchWidget extends Component {
       <button
         className="SearchWidget-button"
         onClick={() => {
+          this.searchInput.value = ''
+          this.setState({
+            ...this.state,
+            searching: false
+          })
           if (query.length > 0) history.push('/search/' + query)
         }}
       >
         <Icon
           name="search"
           onClick={() => {
+            this.searchInput.value = ''
+            this.setState({
+              ...this.state,
+              searching: false
+            })
             if (query.length > 0) history.push('/search/' + query)
           }}
         />

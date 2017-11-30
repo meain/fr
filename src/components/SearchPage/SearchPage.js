@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fuzzysearch from 'fuzzysearch'
+import Icon from 'react-fa'
 
 import './SearchPage.css'
 
 import ThreadListDisplay from '../ThreadListDisplay/ThreadListDisplay'
+import SearchWidget from '../SearchWidget/SearchWidget'
 
 class SearchPage extends Component {
   constructor(props) {
@@ -47,17 +49,25 @@ class SearchPage extends Component {
   render() {
     let searchTerm = this.props.match.params.searchTerm
     let threads = this.state.threads
-    console.table(threads);
+    console.table(threads)
     console.log('searchTerm: ', searchTerm)
     return (
       <div className="SearchPage">
         <h2 className="page-title">Search results</h2>
-        <ThreadListDisplay
-          threads={threads}
-          user={this.props.user}
-          maxHeight="300px"
-          handleClick={this.handleClick}
-        />
+        <SearchWidget objects={this.props.threads} />
+        {threads.length > 0 ? (
+          <ThreadListDisplay
+            threads={threads}
+            user={this.props.user}
+            maxHeight="300px"
+            handleClick={this.handleClick}
+          />
+        ) : (
+          <p className="SearchPage-none">
+            <Icon name="search" />
+            <var>No results to show</var>
+          </p>
+        )}
       </div>
     )
   }

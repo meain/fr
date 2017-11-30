@@ -1,0 +1,9 @@
+.SearchPage-none {
+  text-align: center;
+  padding-top: 100px;
+}
+.SearchPage-none .fa{
+  font-size: 100px;
+  display: block;
+  padding-bottom: 10px;
+}
