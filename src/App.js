@@ -16,6 +16,7 @@ import ThreadDetails from './components/ThreadDetails/ThreadDetails'
 import UserDetails from './components/UserDetails/UserDetails'
 import PageHeader from './components/PageHeader/PageHeader'
 import NewThread from './components/NewThread/NewThread'
+import SearchPage from './components/SearchPage/SearchPage'
 
 class App extends Component {
   render() {
@@ -39,6 +40,7 @@ class App extends Component {
             <Route path="/newPost" render={({ history }) => <NewThread history={history} />} />
             <Route path="/thread/:threadId" component={ThreadDetails} />
             <Route path="/user/:userId" component={UserDetails} />
+            <Route path="/search/:searchTerm" component={SearchPage} />
           </div>
         </div>
       </Router>

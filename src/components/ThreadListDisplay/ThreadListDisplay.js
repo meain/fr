@@ -27,7 +27,7 @@ class ThreadListDisplay extends Component {
             data={thread.data}
             bordered={this.props.bordered}
             raiseOnHover={this.props.raiseOnHover}
-            maxHeight="500px"
+            maxHeight={this.props.maxHeight}
             handleClick={e => this.handleClick(e, thread.id)}
           />
         ))}

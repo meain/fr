@@ -50,11 +50,11 @@ class NewThead extends Component {
         {this.props.user ? (
           <div>
             <br />
-            <h2>New Question</h2>
+            <h2 className="NewThread-title">New Question</h2>
             <Editor hasHeading={true} onSubmit={this.addThread} />
           </div>
         ) : (
-          <div class="NewThread-not-signed-in">
+          <div className="NewThread-not-signed-in">
             <Icon name="user-o" className="NewThread-user-icon" />
             <p>
               <var>Login to ask a new question</var>

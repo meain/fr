@@ -67,9 +67,26 @@ class SearchWidget extends Component {
     return <ObjectItem key={object.id} />
   }
 
+  getSearchButton() {
+    let query = ''
+    if (this.searchInput) {
+      query = this.searchInput.value
+    }
+    let searchButton = withRouter(({ history }) => (
+      <Icon
+        name="search"
+        onClick={() => {
+          if (query.length > 0) history.push('/search/' + query)
+        }}
+      />
+    ))
+    return searchButton
+  }
+
   render() {
     let objects = this.state.displayObjects
     let listHide = this.state.searching ? 'unhide' : ''
+    let SearchButton = this.getSearchButton()
     console.table(objects)
     return (
       <div className="SearchWidget">
@@ -81,14 +98,14 @@ class SearchWidget extends Component {
           onChange={this.filterObjects}
         />
         <button className="SearchWidget-button">
-          <Icon name="search" />
+          <SearchButton />
         </button>
         <div className={'SearchWidget-searchList ' + listHide}>
           <div className="SearchWidget-searches">
             {objects.map((object, index) => this.objectDisplay(object, index))}
             {objects.length === 0 && (
               <div className="SearchWidget-none">
-                <span class="muted">No results</span>
+                <span className="muted">No results</span>
               </div>
             )}
           </div>
