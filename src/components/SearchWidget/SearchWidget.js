@@ -77,7 +77,7 @@ class SearchWidget extends Component {
           ref={ref => (this.searchInput = ref)}
           type="text"
           className="SearchWidget-input"
-          placeholder="Search"
+          placeholder="Search or ask new question"
           onChange={this.filterObjects}
         />
         <button className="SearchWidget-button">
@@ -93,8 +93,8 @@ class SearchWidget extends Component {
             )}
           </div>
           <div className="SearchWidget-extra">
-            <Link to="/">More results</Link>
-            <Link to="/newPost">Ask Question</Link>
+            <Link to="/">All Questions</Link>
+            <Link to="/newPost">Ask New</Link>
           </div>
         </div>
       </div>

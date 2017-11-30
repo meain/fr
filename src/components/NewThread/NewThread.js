@@ -28,7 +28,6 @@ class NewThead extends Component{
           user: this.props.user.uid,
         }
       const key = firebase.database().ref('threads').push(thread).key
-      console.log('key: ', key)
       // Add theard data to user
       firebase.database().ref('users/' + this.props.user.uid + '/threads/' + key).set(true)
       this.props.history.push('/')
