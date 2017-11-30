@@ -31,7 +31,7 @@ class App extends Component {
             background="white"
             color="black"
             position={{ bottom: '10%', right: '50%' }}
-            topDistance={300}
+            topDistance={1500}
             hover={{ background: 'black', color: 'white' }}
             timing="easeIn"
           />
