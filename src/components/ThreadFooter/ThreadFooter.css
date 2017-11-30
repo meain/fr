@@ -17,7 +17,7 @@
   position: fixed;
   bottom: 0px;
   left: 0;
-  z-index: 100;
+  z-index: 9;
   padding: 5px 30px;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }

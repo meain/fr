@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BackToTop from 'react-back-top'
-import Icon from 'react-fa'
 
 import '../node_modules/highlight.js/styles/default.css'
 
@@ -27,7 +26,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <BackToTop
-            text={<Icon name="arrow-up" />}
+            icon="fa fa-arrow-up"
             shape="round"
             background="white"
             color="black"
