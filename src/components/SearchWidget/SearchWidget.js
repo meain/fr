@@ -73,12 +73,19 @@ class SearchWidget extends Component {
       query = this.searchInput.value
     }
     let searchButton = withRouter(({ history }) => (
-      <Icon
-        name="search"
+      <button
+        className="SearchWidget-button"
         onClick={() => {
           if (query.length > 0) history.push('/search/' + query)
         }}
-      />
+      >
+        <Icon
+          name="search"
+          onClick={() => {
+            if (query.length > 0) history.push('/search/' + query)
+          }}
+        />
+      </button>
     ))
     return searchButton
   }
@@ -97,9 +104,7 @@ class SearchWidget extends Component {
           placeholder="Search or ask new question"
           onChange={this.filterObjects}
         />
-        <button className="SearchWidget-button">
-          <SearchButton />
-        </button>
+        <SearchButton />
         <div className={'SearchWidget-searchList ' + listHide}>
           <div className="SearchWidget-searches">
             {objects.map((object, index) => this.objectDisplay(object, index))}
