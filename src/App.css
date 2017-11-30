@@ -28,10 +28,29 @@ button {
   }
 }
 
+.page-title{
+  text-decoration: skyblue underline double;
+  text-decoration-style: wavy;
+  text-align: center;
+  animation: pound 0.3s;
+}
+
 fieldset {
   min-width: 10px;
 }
 
 pre {
   overflow: scroll;
+}
+
+@keyframes pound {
+  from {
+    transform: none;
+  }
+  30% {
+    transform: scale(1.4);
+  }
+  to {
+    transform: none;
+  }
 }

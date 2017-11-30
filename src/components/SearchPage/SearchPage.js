@@ -51,7 +51,7 @@ class SearchPage extends Component {
     console.log('searchTerm: ', searchTerm)
     return (
       <div className="SearchPage">
-        <h2 className="SearchPage-title">Search results</h2>
+        <h2 className="page-title">Search results</h2>
         <ThreadListDisplay
           threads={threads}
           user={this.props.user}

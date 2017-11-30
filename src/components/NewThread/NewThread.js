@@ -50,7 +50,7 @@ class NewThead extends Component {
         {this.props.user ? (
           <div>
             <br />
-            <h2 className="NewThread-title">New Question</h2>
+            <h2 className="page-title">New Question</h2>
             <Editor hasHeading={true} onSubmit={this.addThread} />
           </div>
         ) : (

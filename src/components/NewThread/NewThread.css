@@ -1,9 +1,3 @@
-.NewThread-title{
-  text-decoration: skyblue underline double;
-  text-decoration-style: wavy;
-  text-align: center;
-  animation: pound 0.3s;
-}
 .NewThread-not-signed-in{
   text-align: center;
   padding-top: 100px;

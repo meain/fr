@@ -8,6 +8,7 @@ import { updateThreads, userChanged } from '../../reducers.js'
 import Editor from '../Editor/Editor'
 import Post from '../Post/Post'
 import Thread from '../Thread/Thread'
+import SearchWidget from '../SearchWidget/SearchWidget'
 
 class ThreadDetails extends Component {
   constructor(props) {
@@ -112,6 +113,8 @@ class ThreadDetails extends Component {
     let showEditor = this.props.user !== null && this.state.posts.length === 0 && this.props.user.admin
     return (
       <div className="ThreadDetails">
+        <SearchWidget objects={this.props.threads} />
+        <h2 className="page-title">Question</h2>
         <Thread
           key={this.state.key}
           user={this.props.user}
