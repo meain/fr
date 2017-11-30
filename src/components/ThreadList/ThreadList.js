@@ -8,8 +8,8 @@ import firebase from '../../firebase.js'
 import { updateThreads, userChanged } from '../../reducers.js'
 
 import Loading from '../Loading/Loading'
-import Thread from '../Thread/Thread'
 import ThreadListDisplay from '../ThreadListDisplay/ThreadListDisplay'
+import SearchWidget from '../SearchWidget/SearchWidget'
 
 class ThreadList extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class ThreadList extends Component {
     }
 
     this.searchChange = this.searchChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -34,7 +35,7 @@ class ThreadList extends Component {
     })
   }
 
-  handleClick(ev, key) {
+  handleClick(key) {
     this.props.history.push('/thread/' + key)
   }
 
@@ -65,35 +66,38 @@ class ThreadList extends Component {
           <Loading initialMessage="Loading thread list. Just hang on." />
         ) : (
           <div>
-            <form className="form">
-              <div className="form-item">
-                <input
-                  type="text"
-                  className="search ThreadList-search"
-                  onChange={this.searchChange}
-                  placeholder="Search"
-                />
-                {this.props.user &&
-                  threads.length !== 0 && (
-                    <div className="ThreadList-search-ask">
-                      <kbd>
-                        {' '}
-                        Search for existing question or{' '}
-                        <Link to="/newPost">ask a new question</Link>
-                        .
-                      </kbd>
-                    </div>
-                  )}
-                {!this.props.user &&
-                  threads.length !== 0 && (
-                    <div className="ThreadList-search-ask">
-                      <kbd>
-                        Login to ask a question or just feel free to check out existing ones.
-                      </kbd>
-                    </div>
-                  )}
-              </div>
-            </form>
+            <SearchWidget
+              objects={this.props.threads}
+            />
+            {/* <form className="form"> */}
+            {/*   <div className="form-item"> */}
+            {/*     <input */}
+            {/*       type="text" */}
+            {/*       className="search ThreadList-search" */}
+            {/*       onChange={this.searchChange} */}
+            {/*       placeholder="Search" */}
+            {/*     /> */}
+            {/*     {this.props.user && */}
+            {/*       threads.length !== 0 && ( */}
+            {/*         <div className="ThreadList-search-ask"> */}
+            {/*           <kbd> */}
+            {/*             {' '} */}
+            {/*             Search for existing question or{' '} */}
+            {/*             <Link to="/newPost">ask a new question</Link> */}
+            {/*             . */}
+            {/*           </kbd> */}
+            {/*         </div> */}
+            {/*       )} */}
+            {/*     {!this.props.user && */}
+            {/*       threads.length !== 0 && ( */}
+            {/*         <div className="ThreadList-search-ask"> */}
+            {/*           <kbd> */}
+            {/*             Login to ask a question or just feel free to check out existing ones. */}
+            {/*           </kbd> */}
+            {/*         </div> */}
+            {/*       )} */}
+            {/*   </div> */}
+            {/* </form> */}
             {!this.props.user &&
               threads.length === 0 && (
                 <div className="ThreadList-ask">
@@ -119,6 +123,7 @@ class ThreadList extends Component {
               user={this.props.user}
               bordered={true}
               raiseOnHover={true}
+              handleClick={this.handleClick}
             />
           </div>
         )}

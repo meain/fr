@@ -3,11 +3,22 @@ import React, { Component } from 'react'
 import Thread from '../Thread/Thread'
 
 class ThreadListDisplay extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(ev, key) {
+    this.props.handleClick(key, ev)
+  }
+
   render() {
     let threads = this.props.threads
     let user = this.props.user
     return (
-      <div class="ThreadListd">
+      <div className="ThreadListDisplay">
         {threads.map(thread => (
           <Thread
             key={thread.id}

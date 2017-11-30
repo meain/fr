@@ -1,0 +1,55 @@
+.SearchWidget-input {
+  width: calc(100% - 55px);
+  display: inline-block;
+  /* border-radius: 3px 0 0 3px; */
+  border-radius: 0;
+}
+.SearchWidget-button {
+  width: 55px;
+  display: inline-block;
+  /* border-radius: 0 3px 3px 0; */
+  border-radius: 0;
+}
+.SearchWidget-searchItem {
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.SearchWidget-searchItem.alternate {
+  /* background-color: #f5f5f5; */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.SearchWidget-searchItem:hover {
+  background-color: #f5f5f5;
+}
+.SearchWidget-searchList {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: all 0.5s;
+  overflow-y: hidden;
+  max-height: 0px;
+}
+.SearchWidget-searchList.unhide {
+  max-height: 500px;
+}
+.SearchWidget-searches {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.SearchWidget-extra {
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.SearchWidget-extra a {
+  text-decoration: none;
+}
+.SearchWidget-none {
+  padding: 5px 15px;
+  text-align: center;
+}
