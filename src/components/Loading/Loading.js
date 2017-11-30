@@ -5,7 +5,7 @@ import loadingMessages from './LoadingMessages'
 import './Loading.css'
 
 class Loading extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -14,14 +14,18 @@ class Loading extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let messages = this.state.loadingMessages
-    setInterval(() => {
+    this.refresh = setInterval(() => {
       this.setState({
         ...this.state,
         loadingMessage: messages[Math.floor(Math.random() * messages.length)]
       })
     }, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refresh)
   }
 
   render() {
