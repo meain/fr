@@ -53,3 +53,13 @@
   padding: 5px 15px;
   text-align: center;
 }
+.SearchWidget-list-item-name {
+  width: calc(100% - 50px);
+  display: inline-block;
+  word-wrap: break-word;
+}
+.SearchWidget-list-item-likes {
+  width: 50px;
+  display: inline-block;
+  text-align: right;
+}

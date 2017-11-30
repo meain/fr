@@ -36,9 +36,17 @@ class SearchWidget extends Component {
     } else {
       this.setState({
         ...this.state,
-        searching: false,
+        searching: false
       })
     }
+  }
+
+  getLikes(object) {
+    let likes = []
+    for (let like in object.data.likes) {
+      if (object.data.likes[like]) likes.push(like)
+    }
+    return likes.length
   }
 
   objectDisplay(object, index) {
@@ -51,7 +59,8 @@ class SearchWidget extends Component {
             history.push('/thread/' + object.id)
           }}
         >
-          {object.data.title}
+          <div className="SearchWidget-list-item-name">{object.data.title}</div>
+          <div className="SearchWidget-list-item-likes">{this.getLikes(object)}</div>
         </div>
       )
     })
@@ -61,7 +70,7 @@ class SearchWidget extends Component {
   render() {
     let objects = this.state.displayObjects
     let listHide = this.state.searching ? 'unhide' : ''
-    console.log('objects: ', this.state.searching, listHide, objects)
+    console.table(objects)
     return (
       <div className="SearchWidget">
         <input
@@ -83,7 +92,7 @@ class SearchWidget extends Component {
               </div>
             )}
           </div>
-          <div class="SearchWidget-extra">
+          <div className="SearchWidget-extra">
             <Link to="/">More results</Link>
             <Link to="/newPost">Ask Question</Link>
           </div>
